@@ -2,6 +2,7 @@ O  N  Code point
 û  ⍋  0xDB
  ⎕ 0x90
 
+
 Ç  ↓ 0xC7
 ∊  ¯ 0x220A
 ¸  → 0xB8
@@ -9,17 +10,19 @@ O  N  Code point
 ⎕ (≥)
 ó  ≤  0xF3
 ð   0xF0
-í
+í  (⍉)
+î        î'1234567890+¯'
 ø  ∘
 ≤  (⌽) x2264
 ©
+⌈  ⍳
 ----
 
 Those work as expected
 ASCIIs
-∇ ⍝ ← × ∧ ∨ ⌈
+∇ ⍝ ← × ∧ ∨
 
 ----
 
 Not good
-÷ ⍒ ⌽ ⍉ ⊂ ⊃ ⊥ ⊤ ∩ ∪ ⍎ ⍕
+÷ ⍒ ⌽ ⍉ ⊂ ⊃ ⊥ ⊤ ∩ ∪ ⍎ ⍕ ⌊
