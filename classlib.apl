@@ -46,8 +46,8 @@ BEGIN:A←(Nõõ/RS←∊1Ç∆S)∆0
   ⍝ EQUIVALENCE RELATION ON  ⍳1×⍴E.  E  MUST BE A
   ⍝ SQUARE LOGICAL MATRIX.
   →NOTEST/BEGIN
-  DERR∧/(2=⍴⍴E),(=/⍴E),,E{î}0 1
-BEGIN:→(~T←∧/(2⍴⎕IO){í}E)/0
+  DERR∧/(2=⍴⍴E),(=/⍴E),,E∊0 1
+BEGIN:→(~T←∧/(2⍴⎕IO)⍉E)/0
   NT←NOTEST
   NOTEST←1
   T←∧/,E=X∘.=X←SFEL E
