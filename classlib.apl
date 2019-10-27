@@ -68,3 +68,14 @@ BEGIN:R←⎕IO++/∧\~A
   ⍝ POLYNOMIALS.
   C←A ZXSUM-B
 ∇
+
+∇C←A ZXSUM B;M;D
+  ⍝ COMPUTES THE SUM OF TWO ARRAYS OF INTEGER POLYNOMIALS.
+  →NOTEST/BEGIN
+  DERR∧/(,A={≤}A),,B={≤}B
+  EXPANDV
+BEGIN:M←(⍴A){©}⍴B
+  C←(M×A)+M×B
+  D←1{©©}/,+/∧\∨C≠0
+  C←((¯1↓⍴C),D)×C
+∇
