@@ -5,3 +5,18 @@ O  N  Code point
 ∊  ¯ 0x220A
 ¸  →
 ∆  ⍴
+⎕ (≥)
+ó
+í
+ø  ∘
+
+----
+
+Those work as expected
+ASCIIs
+∇ ⍝ ← × ∧ ∨
+
+----
+
+Not good
+÷ ⍒ ⌽ ⍉ ⊂ ⊃ ⊥ ⊤ ∩ ∪ ⍎ ⍕

@@ -13,3 +13,14 @@
   DERR 1=⍴⍴V
   W←(1,(1↓W)>¯1↓W)/W←V[⍋V]
 ∇
+
+∇T←K SSUB N;X
+  ⍝ LISTS ALL K-ELEMENT SUBSETS OF  ⌈N. ORIGIN DEPENDENT.
+  DERR∧/(K{⎕}0),(K{ó}N),(1=⍴K),(1=⍴N),(N=≤N←,N),K=≤K←,K
+  →(∧/K≠0 1)/GENERAL
+  T←((K!N),K)⍴⌈N
+  →0
+GENERAL:T←1+(K-1)SSUB N-1
+  X←,T[;⎕IO]∘.>⌈N-1
+  T←(X/(⍴X)⍴⌈N-1),T[X/,{í}((N-1),1×⍴T)⍴⌈1×⍴T;]
+∇
