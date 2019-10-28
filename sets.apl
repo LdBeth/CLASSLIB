@@ -50,6 +50,6 @@ BEGIN:→(~T←∧/(2⍴⎕IO)⍉E)/0
   ⍝ CHARACTERISTIC VECTORS ARE IN  A.
   ⍝ THE SETS MUST BE NONEMPTY.
   →NOTEST/BEGIN
-  DERR(1≤⍴⍴A)∧∧/,∧/A
+  DERR(1≤⍴⍴A)∧∧/,∨/A
 BEGIN:R←⎕IO++/∧\~A
 ∇

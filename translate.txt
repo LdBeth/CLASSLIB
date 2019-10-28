@@ -20,11 +20,15 @@ O  N  Code point
 ⌈  ⍳
 ∨ ⌽
 × ↑
+∧ ∨ ??
+
+0161  [X 'U←FRINV/⌈∆FRINV←(∧/íC)∧{∧}/C←B=1'
+0571  [XM AX RXPROD BX' '¸(~1×X←∊1∨X)/LOOP' 'D←1©©/,+/{∧}\∨0≠C'
 ----
 
 Those work as expected
 ASCIIs
-∇ ⍝ ← ∧
+∇ ⍝ ←
 
 ----
 
