@@ -9,6 +9,6 @@ as MACSYMA of MacLisp.
 
 # TODO list
 
-[ ] convert to unicode
-[ ] write documentation
-[ ] implement `SHOW` function as described in *Computational Algebra with APL*.
+- [ ] convert to unicode
+- [ ] write documentation
+- [ ] implement `SHOW` function as described in *Computational Algebra with APL*.
