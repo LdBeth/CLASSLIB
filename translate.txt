@@ -1,7 +1,7 @@
 O  N  Code point
 û  ⍋  0xDB
  ⎕ 0x90
-
+ ⊥
 
 Ç  ↓ 0xC7
 ∊  ¯ 0x220A
