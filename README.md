@@ -6,3 +6,9 @@ See https://comp.lang.apl.narkive.com/bA8Q62IO/archive-for-charles-c-sims-classl
 CLASSLIB is a libaray provides APL procedures that enables the ability doing
 multiple percision and symbolic computations, comparable to CAS programs such
 as MACSYMA of MacLisp.
+
+# TODO list
+
+[ ] convert to unicode
+[ ] write documentation
+[ ] implement `SHOW` function as described in *Computational Algebra with APL*.
