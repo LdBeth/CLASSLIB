@@ -31,13 +31,13 @@ NOTEST←0
   ⍝ COMPUTES THE CHARACTERISTIC VECTORS OF AN ARRAY OF INTEGER
   ⍝ VECTORS LISTING SUBSETS OF  ⍳N.  ORIGIN DEPENDENT.
   →NOTEST/BEGIN
-  DERR∧/(N>0),(N=≤N),1=⍴N←,N
-  DERR∧/(,S={≤}S),(,S{⎕}⎕IO),],S<⎕IO+N
+  DERR∧/(N>0),(N=⌊N),1=⍴N←,N
+  DERR∧/(,S=⌊S),(,S≥⎕IO),,S<⎕IO+N
   →(0<⍴⍴S)/BEGIN
   S←,S
-BEGIN:A←(Nõõ/RS←∊1Ç∆S)∆0
-  S←((õ/RS),∊1×∆S)∆S
-  A[⎕IO+N{}((õ/⍴S)⍴(⍳1×⍴S)-⎕IO),[⎕IO-0.5],{í}S-⎕IO]←1
+BEGIN:A←(N××/RS←¯1↓⍴S)⍴0
+  S←((×/RS),¯1↑⍴S)⍴S
+  A[⎕IO+N{}((×/⍴S)⍴(⍳1↑⍴S)-⎕IO),[⎕IO-0.5],⍉S-⎕IO]←1
   A←(RS,N)⍴A
 ∇
 

@@ -23,9 +23,9 @@ O  N  Code point
 
 Those work as expected
 ASCIIs
-∇ ⍝ ←
+∇ ⍝ ← ∧
 
 ----
 
 Not good
-÷ ⍒ ⌽ ⍉ ⊂ ⊃ ⊥ ⊤ ∩ ∪ ⍎ ⍕ ⌊
+÷ ⍒ ⊂ ⊃ ⊥ ⊤ ∩ ∪ ⍎ ⍕ ⊖
