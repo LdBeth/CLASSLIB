@@ -1,0 +1,54 @@
+From walter.felscher@uni-tuebingen.de Sun Dec 17 07:24:33 1995
+Date: Sun, 17 Dec 1995 13:22:40 +0100 (MEZ)
+From: Walter Felscher <walter.felscher@uni-tuebingen.de>
+To: Lee Dickey <ljdickey@math.uwaterloo.ca>
+Subject: Re: Extended precision
+
+MPASPAC
+
+A.
+
+MPASPAC.ATF  will work under each of IBM's APL2/PC , APL2/OS2 , APL2/6000 ,
+running under DOS or OS2 on PCs or under AIX on RS6000 work stations.
+The file should be loaded with the command ")IN MPASPAC" and can,
+if so desired after having made changes, be saved either as an ATF-file
+with the command ")OUT newfile" or as a processor dependent APL-file
+with the command ")SAVE newfile" .
+
+B.
+
+With a few exceptions, the functions in MPASPAC are variants of functions
+coming from
+
+ C.C.Sims: A classlib user's manual.
+             Wiley 1985
+
+which is a companion to
+
+ C.C.Sims: Abstract Algebra. A computational approach.
+             Wiley 1984 .
+
+In particular, the functions beginning with MPZ...  are directly from
+there, as is ZNDET .
+
+C.
+
+For input and output, multiprecision integers are treated as character
+vectors of digits to base 10 : C-10-vectors.
+
+For computation, these are transformed into numerical vectors of
+numbers which are digits to base G=1E6 : N-1E6-vectors.
+
+Functions transforming input are MPZUNF and MZCNCO .
+
+Functions transforming output are MPZFORM and REEM, REEN .
+
+The C-10-vector functions MZ___ use for computation analogously named
+N-1E6-vector functions MG___ .
+
+*
+
+Errors and improvements may be reported to :
+
+Walter Felscher , felscher@maplog.informatik.uni-tuebingen.de
+

@@ -1,0 +1,345 @@
+XNIO 0 1                                                                      ø
+XNCT 0 9.999999999999999Eı14                                                  ø
+XCFC 1 5 .,*0_                                                                ø
+XNRL 0 2063936098                                                             ø
+XCPR 0                                                                        ø
+XCLX 1 8 ABSTRACT                                                             ø
+XCABSTRACT 1 0                                                                 ø
+*(1995 12 15 23 17 21 412)                                                     ø
+ FANCESTR FX 'ANCESTR X;A;H'                                                  ø
+  'ä For a function with name X , ANCESTR produces the names of function       ø
+ s' 'ä called by X and listed in the line beginning with ''ä 888'''            ø
+  '½(®í(1,(æA))æA½H/ì1ÆæA),(H½^/A[;ì5]=((1ÆæA),5)æ''ä 888'')ğA½1 0ÇCR        ø
+XX'                                                                            ø
+ NBIGINV 1 50 9999071 9165826 283452 9555586 7132394 5124772 2209919           ø
+  1479669 2132758 1530962 129491 477215 1243524 6299670 907263 796818          ø
+  9821791 5714457 7236163 7146222 5016272 3301955 3227005 6747281              ø
+  2534875 1143272 7126244 8503876 5143814 8711328 4443269 5165260              ø
+  9889622 6788847 2040129 7400470 4910934 9702285 9257415 3970022              ø
+  2784612 4765060 4998631 8059704 5756328 8621884 7519471 348897 2528490       ø
+X 5009170                                                                      ø
+ NBIGPRIMES 1 50 9999071 9999083 9999161 9999163 9999167 9999193 9999217       ø
+  9999221 9999233 9999271 9999277 9999289 9999299 9999317 9999337              ø
+  9999347 9999397 9999401 9999419 9999433 9999463 9999469 9999481              ø
+  9999511 9999533 9999593 9999601 9999637 9999653 9999659 9999667              ø
+  9999677 9999713 9999739 9999749 9999761 9999823 9999863 9999877              ø
+  9999883 9999889 9999901 9999907 9999929 9999931 9999937 9999943              ø
+X 9999971 9999973 9999990.999999989                                            ø
+*(1995 12 15 22 39 36 556)                                                     ø
+ FBIGRED FX 'Z½X BIGRED Y;I'                                                  ø
+  'ä  Z is the inverse mod X of the product õ/Y of the members of Y'           ø
+  'ä 888 TINVERTP' 'Z½X|Y[I½1]' 'REK:¸((æY)<I½I+1)/END' 'Z½X|ZõY[I]'           ø
+X '¸REK' 'END:Z½X TINVERTP Z'                                                  ø
+*(1995 12 15 22 39 37 560)                                                     ø
+ FCAU FX 'Z½CAU X;A' 'Z½(1ÇX)+0.5õAõ(1+A½+/X)'                                ø
+X 'ä Cauchy''s pairing function.' 'äDT 1.6.88'                                 ø
+*(1995 12 16 23 26 46 552)                                                     ø
+XFDERR FX 'DERR T' '¸T/0' '''input: domain error''' '¸'                       ø
+*(1992 10 31 10 35 54 608)                                                     ø
+ FDESCRIBE FX 'DESCRIBE;A;I;IO;R' 'I½~IO½1' 'ABSTRACT'                      ø
+  'TC[2],''Press RETURN to move to the next function'',TC[2]'                ø
+  'L1:¸(''ABSTRACT''^.=8ÆA½(NL 3)[I½I+1;])/LA'                                ø
+  '¸(''DESCRIBE''^.=8ÆA)/LA' '¸(''COMPOSE''^.=7ÆA)/LA'                         ø
+  '¸(''EDLIN''^.=5ÆA)/LA' '¸(''TITLEC''^.=6ÆA)/LA'                             ø
+  '¸(''EDWORD''^.=6ÆA)/LA' '¸(''TIME''^.=4ÆA)/LA'                              ø
+  '¸(''APL_ON''^.=6ÆA)/LA' '¸(''APL_OFF''^.=7ÆA)/LA' 'R½CR A'                 ø
+  '(ı1+R[1;]ì'';'')Æ,R[1;]' '79æ''~''' '0 1Ç(A[;1]=''ä'')ğA½1 0ÇR' '‘'         ø
+  'LA:¸(I<1ÆæNL 3)/L1'                                                        ø
+  'ä Function printing the commentary lines (lines starting with ä ) of        ø
+ all' 'ä functions in the WS with exception of those named in [4-12] .'        ø
+X 'äDT 1.12.86'                                                                ø
+*(1995 12 15 22 39 37 560)                                                     ø
+ FENT FX 'Z½ENT R;B'                                                          ø
+  'ä  Z entsteht aus der numerischen Gr”sse R durch Auf- resp.'                ø
+  'ä  Abrunden der Glieder zu ganzen Zahlen; æZ = æR !'                        ø
+X 'Z½((~B)õ©R)+(B½0.5ó(©R)-R)õ¾R'                                              ø
+*(1995 12 16 0 0 18 244)                                                       ø
+ FFAC21 FX 'Y½FAC21 X;J;S;V'                                                  ø
+  'ä ‘-algorithm 44a by R.Holmes for factorization' 'ä 888  VMUL7'             ø
+  'Y½0æ0' 'TRY2:Y½Y,(J½0=2|X)æ2' '¸((1=X½Xö1+J),J)/(PRT,TRY2)'                 ø
+  'TRY3:Y½Y,(J½0=3|X)æ3' '¸((1=X½Xö1+Jõ2),J)/(PRT,TRY3)'                       ø
+  'TRY5:Y½Y,(J½0=5|X)æ5' '¸((1=X½Xö1+Jõ4),J)/(PRT,TRY5)'                       ø
+  'TRY7:Y½Y,(J½0=7|X)æ7' '¸((1=X½Xö1+Jõ6),J)/(PRT,TRY7)' 'V½VMUL7'             ø
+  'SET:S½(|X)*0.5' 'TES:¸(V[1]>S)/TE1' '¸(49=J½(V|X)ì0)/REK'                   ø
+  '¸SET,(Y½Y,V[J]),X½XöV[J]' 'REK:¸TES,V½V+210' 'TE1:¸(1=X)/PRT'               ø
+X 'Y½Y,X' 'PRT:¸0'                                                             ø
+XNG 0 1000000                                                                  ø
+*(1995 12 15 22 39 36 556)                                                     ø
+ FMAKEBIG FX 'V½M MAKEBIG N;I;X'                                              ø
+  'ä  V ist the vector of the N last primes P such that PóM .'                 ø
+  'ä  In a fixed situation V is called BIGPRIMES .' 'ä 888 FAC21'              ø
+  'V½ìI½0' 'REK:¸(NóæV)/0' 'NEX:I½I+2' '¸(1<æFAC21 X½(M+1)-I)/NEX'             ø
+X 'V½X,V' '¸REK'                                                               ø
+*(1995 12 15 22 39 36 556)                                                     ø
+ FMAKEBIGINV FX 'MAKEBIGINV;V;W;I'                                            ø
+  'ä  Starting from BIGPRIMES, for i>1 the number BIGV[i] is the inverse       ø
+ '                                                                             ø
+  'ä  mod BIGPRIMES[i] of the product of the first i-1 members of BIG-'        ø
+  'ä  PRIMES . In a fixed situtation, BIGV is called BIGINV .'                 ø
+  'ä 888 BIGPRIMES BIGRED' 'BIGV½1ÆW½BIGPRIMES' 'I½1'                          ø
+X 'REK:¸((æW)<I½I+1)/0' 'BIGV½BIGV,(W[I]BIGRED(I-1)ÆW)' '¸REK'                 ø
+*(1995 12 15 23 29 27 484)                                                     ø
+ FMCAU FX 'Z½X MCAU Y;G;Y1;A;Z1;QQ'                                           ø
+  'ä Cauchy''s pairing function for integers as C-10 vectors'                  ø
+  'äCA MZCNCO MGNCCO MGSUMM MGPRODZ MGREM' 'G½1000000'                         ø
+  'A½(MZCNCO X)MGSUMM Y1½MZCNCO Y'                                             ø
+  'Z1½(,2)MGREM A MGPRODZ A MGSUMM(,1)' 'Z½MGNCCO QQ MGSUMM Y1'                ø
+X 'äDT 5.7.89'                                                                 ø
+*(1995 12 16 21 46 46 624)                                                     ø
+ FMGAVA FX 'B½MGAVA A'                                                        ø
+  'ä A is a vector of integers. B is the N-1E6-vector of its absolute va       ø
+Xlue' 'ä 888 REEM' 'B½|REEM A'                                                 ø
+*(1995 12 16 19 54 49 660)                                                     ø
+ FMGGCD FX 'C½A MGGCD B;QQ'                                                   ø
+  'ä A,B,C are N-1E6-vectors. C is the natural GCD of A,B .'                   ø
+  'ä 888 MGREMN MGSUMM MGPRODN REE REEM * G GLOBAL' 'A½|A' 'C½|B'              ø
+X 'LOOP:¸(0=1ÆA)/0' 'B½A MGREMN C' 'C½A' 'A½B' '¸LOOP'                         ø
+*(1995 12 16 20 12 19 376)                                                     ø
+ FMGITPROD FX 'Z½MGITPROD B;R;I;IO'                                          ø
+  'ä B is a N-1E6-vector, Z is a C-10-vector. Z is the product of the'         ø
+  'ä members of B .' 'ä 888  MZPROD' 'R½æB' 'Z½®B[I½IO½1]'                    ø
+X 'REK:¸(R<I½I+1)/0' 'Z½Z MZPROD®,B[I]' '¸REK'                                 ø
+*(1995 12 16 20 21 38 488)                                                     ø
+ FMGNCCO FX 'X½MGNCCO A'                                                      ø
+  'ä A is a N-1E6-vector, X is the corresponding C-10-vector'                  ø
+  'X½,((æA),ı6)Æ0®((æA),1)æ¾|A½,A' 'X[(X='' '')/ìæX]½''0'''                    ø
+X 'X½((ı1=õ1ÆA)æ''ı''),(((''0''ôı1ÇX)ì1)-IO)ÇX'                               ø
+*(1995 12 16 21 37 51 608)                                                     ø
+ FMGPOWER FX 'B½A MGPOWER N;T;N0;G'                                           ø
+  'ä N is an ordinary integer, A,B are integers as N-1E6-vectors .'            ø
+  'ä B is the N-th power of A .' 'ä 888  MGPRODN REE' 'N0½N'                   ø
+  'G½1000000' '¸(0=T½õ1Æ((Aô0)/A½,A))/0,B½0' 'A½|A' 'B½,1' '¸(N=0)/END'        ø
+  'REK:¸(0=2|N)/EVEN' 'B½B MGPRODN A' 'EVEN:¸(0=N½¾Nö2)/END'                   ø
+X 'A½A MGPRODN A' '¸REK' 'END:B½(T*N0)õB'                                      ø
+*(1995 12 15 22 39 36 556)                                                     ø
+ FMGPRODN FX 'Z½P MGPRODN Q;I;V;IO'                                          ø
+  'ä P,Q,Z ARE N-G-VECTORS, P,Q POSITIVE. Z IST THE PRODUCT OF P,Q .'          ø
+  'ä 888 REE  *   G GLOBAL' 'I½IO½0' 'Q½,Q' 'V½(æP)æ0'                        ø
+  'REK:Z½(((I½I+1)æ0),PõQ[I])+V,0' '¸(I=æQ)/END' '¸REK,V½Z'                    ø
+X 'END:Z½REE Z'                                                                ø
+*(1995 12 16 19 24 46 528)                                                     ø
+ FMGPRODZ FX 'Z½P MGPRODZ Q;SP;SQ'                                            ø
+  'ä P,Q,Z are N-G-vectors. Z is the product of P,Q .'                         ø
+  'ä 888 MGPRODN MGSUMM REEM REE *  G GLOBAL'                                  ø
+  '¸(0=SP½õ1Æ((Pô0)/P½,P))/END0' '¸(0=SQ½õ1Æ((Qô0)/Q½,Q))/END0'                ø
+X 'Z½SPõSQõ(|P)MGPRODN|Q' '¸0' 'END0:Z½0'                                      ø
+*(1995 12 16 19 44 22 512)                                                     ø
+ FMGREM FX 'C½A MGREM B;IO;I;L;M;N;Q;R;SA;SC;T'                              ø
+  'ä A,B C are N-1E6-vectors; A positive. C is the remainder of A'             ø
+  'ä divided in B. The quotient is saved in QQ .'                              ø
+  'ä 888  MGSUMM MGPRODZ MGPRODN REEM REE  *  G GLOBAL' 'QQ½,IO½0'            ø
+  'C½B' '¸(0=SA½õ1ÆA)/0' 'A½|A' 'REK:¸(((æC)<æA)^0>SC½õ1ÆC)/NEG'               ø
+  '¸((æC)>æA)/DIV' '¸(0>SC)/DIV' '¸((æC)<æA)/0' '¸((æA)=I½(AôC)ì1)/DIV'        ø
+  '¸(A[I]>C[I])/0' 'DIV:N½¾10µQ½(G|(M½3¾æC)ÆC)öG(L½3¾æA)ÆA'                  ø
+  '¸(12>T½N+6õ((æC)-M)-(æA)-L)/LIL' 'Q½¾Qõ10*T-N+6õR½ı2+¾Tö6'                  ø
+  'Q½(SAõSCõ,(3æG)˜Q),Ræ0' '¸FIT' 'LIL:Q½¾SAõSCõQõ10*T-N'                      ø
+  'Q½(õQ)õ((1+¾10µ|Q)æG)˜|Q' 'FIT:QQ½QQ MGSUMM Q'                              ø
+  'C½C MGSUMM(-SA)õQ MGPRODZ A' '¸REK' 'NEG:C½C MGSUMM A'                      ø
+X 'QQ½QQ MGSUMM-SA'                                                            ø
+*(1995 12 16 19 56 19 548)                                                     ø
+ FMGREMN FX 'C½A MGREMN B;IO;I;L;M;N;Q;R;T;SC'                               ø
+  'ä A,B C are N-1E6-vectors; A,B positive. C is the remainder of A'           ø
+  'ä divided in B. The quotient is saved in QQ .'                              ø
+  'ä 888  MGSUMM MGPRODN REEM REE  *  G GLOBAL' 'QQ½,IO½0' 'C½B'              ø
+  'REK:¸(((æC)<æA)^0>SC½õC[0])/NEG' '¸((æC)>æA)/DIV' '¸(0>SC)/DIV'             ø
+  '¸((æC)<æA)/0' '¸((æA)=I½(AôC)ì1)/DIV' '¸(A[I]>C[I])/0'                      ø
+  'DIV:N½¾10µQ½(G|(M½3¾æC)ÆC)öG(L½3¾æA)ÆA'                                   ø
+  '¸(12>T½+/N+6õ((æC)-M)-(æA)-L)/LIL' 'Q½¾Qõ10*T-N+6õR½ı2+¾Tö6'                ø
+  'Q½(SCõ,(3æG)˜Q),Ræ0' '¸FIT' 'LIL:Q½¾SCõQõ10*T-N'                            ø
+  'Q½(õQ)õ((1+¾10µ|Q)æG)˜|Q' 'FIT:QQ½QQ MGSUMM Q'                              ø
+  'C½C MGSUMM ı1õQ MGPRODN A' '¸REK' 'NEG:C½C MGSUMM A'                        ø
+X 'QQ½QQ MGSUMM ı1'                                                            ø
+*(1995 12 16 20 14 7 336)                                                      ø
+ FMGREMN1 FX 'C½A MGREMN1 B;IO;I;L;M;N;Q;R;T;SC'                             ø
+  'ä A,B C are N-1E6-vectors; A,B positive. C is the remainder of A'           ø
+  'ä divided in B. The quotient is saved in QQ .'                              ø
+  'ä 888  MGSUMM MGPRODN  *  G GLOBAL' 'QQ½,IO½0' 'C½B'                       ø
+  'REK:¸((((æC)<æA)^0>SC),((æC)>æA),0>SC½õC[0])/NEG,DIV,DIV'                   ø
+  '¸(((æC)<æA),((æA)=I),A[I]>C[I½(AôC)ì1])/0,DIV,0'                            ø
+  'DIV:N½¾10µQ½(G|(M½3¾æC)ÆC)öG(L½3¾æA)ÆA'                                   ø
+  '¸(12>T½+/N+6õ((æC)-M)-(æA)-L)/LIL' 'Q½¾Qõ10*T-N+6õR½ı2+¾Tö6'                ø
+  'Q½(SCõ,(3æG)˜Q),Ræ0' '¸FIT' 'LIL:Q½¾SCõQõ10*T-N'                            ø
+  'Q½(õQ)õ((1+¾10µ|Q)æG)˜|Q' 'FIT:QQ½QQ MGSUMM Q'                              ø
+  'C½C MGSUMM ı1õQ MGPRODN A' '¸REK' 'NEG:C½C MGSUMM A'                        ø
+X 'QQ½QQ MGSUMM ı1'                                                            ø
+*(1995 12 16 20 22 55 560)                                                     ø
+ FMGSUM FX 'C½A MGSUM B;M'                                                    ø
+  'ä A,B,C are nonnegative N-1E6-vectors. C is the sum A plus B .'             ø
+X 'ä 888 REE' 'M½-(æA½,A)©æB½,B' 'C½REE(MÆA)+MÆB'                              ø
+*(1995 12 16 21 39 8 444)                                                      ø
+ FMGSUMM FX 'C½A MGSUMM B;M'                                                  ø
+  'ä A,B,C are N-1E6-vectors. C is the sum A plus B .' 'ä 888 REEM'            ø
+X 'M½-(æA½,A)©æB½,B' 'C½REEM(MÆA)+MÆB'                                         ø
+*(1995 12 16 23 41 22 516)                                                     ø
+ FMPZFORM FX 'X½MPZFORM A'                                                    ø
+  'ä numeric to character for vectors of digits to base 1E6'                   ø
+  'X½,((æA),ı6)Æ0®((æA),1)æ¾|A½,A' 'X[(X='' '')/ìæX]½''0'''                    ø
+X 'X½((ı1=õ1ÆA)æ''ı''),(((''0''ôı1ÇX)ì1)-IO)ÇX'                               ø
+*(1995 12 16 19 26 2 360)                                                      ø
+ FMPZNRMLZ FX 'B½MPZNRMLZ A;SIGN;S'                                           ø
+  'ä normalized vector of digits to base 1E6' 'DERR^/(1òææA),B=¾B½,A'          ø
+  'SIGN½1' 'LOOP:¸(0=æB½(((Bô0)ì1)-IO)ÇB)/ZERO' 'B½¾BõS½õ1ÆB'                 ø
+  'SIGN½SõSIGN' '¸(^/(B<1000000),Bò0)/END'                                     ø
+  'B½(S,0)+0,B-1000000õS½¾Bö1000000' '¸LOOP' 'ZERO:¸B½,0'                      ø
+X 'END:B½SIGNõB'                                                               ø
+*(1995 12 16 19 48 48 632)                                                     ø
+ FMPZPROD FX 'Z½X MPZPROD Y'                                                  ø
+  'ä product of integers given as character vectors to base 10'                ø
+  'ä 888 MPZFORM MPZUNF MPZPROD0'                                              ø
+X 'Z½MPZFORM(MPZUNF X)MPZPROD0 MPZUNF Y'                                       ø
+*(1995 12 16 19 57 15 536)                                                     ø
+ FMPZPROD0 FX 'C½A MPZPROD0 B;IO;U'                                          ø
+  'ä product of vectors of digits to base 1E6' 'ä 888 MPZNRMLZ' 'IO½0'        ø
+X 'U½(A½,A)ø.õ,B' 'C½MPZNRMLZ+ğ(-ìæA)èU,(0 ı1+2ææA)æ0'                         ø
+*(1995 12 16 23 16 43 500)                                                     ø
+ FMPZUNF FX 'A½MPZUNF X;IO;M;SIGN'                                           ø
+  'ä converts character vector X into vector of digits to base 1E6'            ø
+  'IO½0' 'M½''ı''=1ÆX½,X' 'SIGN½1ÆMÆX' 'DERR^/(X½MÇX)î''0123456789'''         ø
+X 'A½,¯((7õM)æ0 1 1 1 1 1 1)\(ı6õM½©(æX)ö6)ÆX' 'A½(ı1*SIGN=''ı'')õA'           ø
+*(1995 12 16 20 24 6 372)                                                      ø
+ FMZAVA FX 'B½MZAVA A;N'                                                      ø
+  'ä A,B are C-10-vectors. B is the absolute value of A .'                     ø
+  'DERR(1òææA)^^/,Aî''0123456789+ı''' '¸(~(1ÆA½,A)î''+ı'')/NOSIGN'             ø
+X 'A½1ÇA' 'NOSIGN:N½+/^\A=''0''' '¸(0<æB½NÇA)/0' 'B½,''0'''                    ø
+*(1995 12 16 21 40 26 520)                                                     ø
+ FMZCNCO FX 'A½MZCNCO X;IO;M;N'                                              ø
+  'ä X is a C-10-vector, A is the corresponding N-1E6-vector' 'IO½0'          ø
+  'M½''ı''=1ÆX½,X' 'DERR^/(X½MÇX)î''0123456789'''                              ø
+X 'A½(ı1*M)õ,¯((7õN)æ0 1 1 1 1 1 1)\(ı6õN½©(æX)ö6)ÆX'                          ø
+*(1995 12 15 23 45 22 528)                                                     ø
+ FMZDET FX 'D½MZDET A;IO;E;N;NN;F;H;P;I;QQ;N2;G'                             ø
+  'ä D is a C-10 number which is the determinant (after Cabay and Lam)'        ø
+  'ä of the matrix X consisting of usual (APL single precision) numbers'       ø
+  'ä 888 BIGPRIMES ZNDET BIGINV MGREM MGPROD MGPRODN MGPRODZ MGSUMM MGNC       ø
+ CO' 'ä 888 REEM REE' 'DERR^/(2=ææA),(=/æA),,A=¾A' 'IO½1' 'G½1000000'         ø
+  'E½(µ2)++/µ(+/AõA)*0.5' 'DERR(æBIGPRIMES)òN½©EöµBIGPRIMES[1]'                ø
+  'N2½¾0.5õNN½BIGPRIMES[1]' 'D½REEM,(NN|N2+ZNDET A)-N2' 'P½,I½1'               ø
+  'REK:¸(N<I½I+1)/END' 'N2½¾0.5õNN½BIGPRIMES[I]' 'F½ZNDET A'                   ø
+  'H½(NN|N2+BIGINV[I]õF-1000000(REE,NN)MGREM D)-N2'                           ø
+  'P½P MGPRODZ,BIGPRIMES[I-1]' 'D½D MGSUMM P MGPRODZ,H' '¸REK'                 ø
+X 'END:D½MGNCCO D'                                                             ø
+*(1995 12 16 19 39 36 548)                                                     ø
+ FMZDIFF FX 'Z½X MZDIFF Y'                                                    ø
+  'ä X,Y,Z are (signed) C-10-vectors. Z is the difference X minus Y .'         ø
+X 'ä 888 MZCNCO MGNCCO MGSUMM REEM' 'Z½MGNCCO(MZCNCO X)MGSUMM-MZCNCO Y'        ø
+*(1995 12 16 19 50 56 672)                                                     ø
+ FMZFACC FX 'Z½MZFACC N;M;R;I;A'                                              ø
+  'ä  N is an ordinary positive integer. Z is a C-vector. If Nó9670 then       ø
+ ' 'ä  Z is the factorial N! .'                                                ø
+  'ä 888 MZPROD MZCNCO MGNCCO MGPRODZ MGPRODN MGSUMM REEM REE'                 ø
+  '¸(N>9670)/END4' 'Z½®,!N¾10' '¸(Nó10)/0'                                     ø
+  '¸(0=R½¾(M½ı10+N¾100)ö7)/END0' 'I½1' 'A½10+ìM'                               ø
+  'REK0:Z½Z MZPROD®,õ/7ÆA' 'A½7ÇA' '¸(RòI½I+1)/REK0' 'Z½Z MZPROD®,õ/A'         ø
+  '¸(Nó100)/0' '¸(0=R½¾(M½ı100+N¾159)ö5)/END1' 'I½1' 'A½100+ìM'                ø
+  'REK1:Z½Z MZPROD®,õ/5ÆA' 'A½5ÇA' '¸(RòI½I+1)/REK1' 'Z½Z MZPROD®,õ/A'         ø
+  '¸(Nó159)/0' '¸(0=R½¾(M½ı159+N¾959)ö4)/END2' 'I½1' 'A½159+ìM'                ø
+  'REK2:Z½Z MZPROD®,õ/4ÆA' 'A½4ÇA' '¸(RòI½I+1)/REK2' 'Z½Z MZPROD®,õ/A'         ø
+  '¸(Nó959)/0' '¸(0=R½¾(M½ı959+N¾9670)ö3)/END3' 'I½1' 'A½959+ìM'               ø
+  'REK3:Z½Z MZPROD®,õ/3ÆA' 'A½3ÇA' '¸(RòI½I+1)/REK3' 'Z½Z MZPROD®,õ/A'         ø
+  '¸0' 'END0:Z½Z MZPROD®,õ/10+ìM' '¸0' 'END1:Z½Z MZPROD®,õ/100+ìM' '¸0'        ø
+  'END2:Z½Z MZPROD®,õ/159+ìM' '¸0' 'END3:Z½Z MZPROD®,õ/959+ìM' '¸0'            ø
+X 'END4:''THIS FUNCTION WORKS ONLY FOR Nó9670 '''                              ø
+*(1995 12 16 19 58 19 556)                                                     ø
+ FMZGCD FX 'Z½X MZGCD Y;G'                                                    ø
+  'ä X,Y,Z are C-10-vectors. C is the natural GCD of A,B .'                    ø
+  'ä 888 MZCNCO MGNCCO MGGCD MGREMN MGSUMM MGPRODN REE REEM'                   ø
+X 'G½1000000' 'Z½MGNCCO(MZCNCO X)MGGCD MZCNCO Y'                               ø
+*(1995 12 16 20 17 19 396)                                                     ø
+ FMZNEG FX 'B½MZNEG A;IO;I;C' 'ä A,B are C-10-vectors. B is minus A .'       ø
+  'IO½0' 'DERR(1òææA)^'' ''=1Æ0Æ,A' 'I½(C½1ÆB½,A)î''+ı''' 'B½IÇB'             ø
+  'DERR^/Bî''0123456789''' 'B½(+/^\''0''=ı1ÇB)ÇB'                              ø
+X '¸((C=''ı'')ë''0''=1ÆB)/0' 'B½''ı'',B'                                       ø
+*(1995 12 16 20 25 29 468)                                                     ø
+ FMZPOWER FX 'Z½X MZPOWER N'                                                  ø
+  'ä N is an ordinary integer, X,Z are integers as C-10-vectors.'              ø
+  'ä Z is the N-th power of X .'                                               ø
+  'ä 888 MZCNCO MGNCCO MGPOWER MGPRODN REE'                                    ø
+X 'Z½MGNCCO(MZCNCO X)MGPOWER N'                                                ø
+*(1995 12 16 20 33 30 504)                                                     ø
+ FMZPROD FX 'Z½X MZPROD Y;G'                                                  ø
+  'ä X,Y,Z are C-10-vectors. Z is the product of X,Y .'                        ø
+  'ä 888 MZCNCO MGNCCO MGPRODZ MGPRODN MGSUMM REEM REE' 'G½1000000'            ø
+X 'Z½MGNCCO(MZCNCO X)MGPRODZ MZCNCO Y'                                         ø
+*(1995 12 16 19 16 29 428)                                                     ø
+ FMZREM FX 'Z½X MZREM Y;A;B;C;SA;SB;SC;G'                                     ø
+  'ä X,Y,Z are C-10-vectors. Z is the remainder of X divided in Y :'           ø
+  'ä Y = QQõX + Z  with (1) Z=Y if X=0 or Y=0 , (11) QQ=1 if X=0 ,'            ø
+  'ä (12) QQ=0 if Xô0 , Y=0 , (2) 0óZ<X if 0<X , (3) X<Zó0 if X<0 .'           ø
+  'ä QQ is saved.' 'ä speed slightly below MZREMP .'                           ø
+  'ä 888  MZCNCO MGNCCO MGREMN MGSUMM MGSUM MGPRODN REEM REE'                  ø
+  'G½1000000' 'SA½õ1ÆA½(Aô0)/A½MZCNCO X' 'SB½õ1ÆB½(Bô0)/B½MZCNCO Y'            ø
+  '¸(0ôSAõSB)/NEX' 'Z½Y' 'QQ½®,SA=0' '¸0' 'NEX:SC½ë/0ôC½(|A)MGREMN|B'          ø
+  '¸((0<SA)^0<SB)/END' '¸((0>SA)^0<SB)/END1' '¸((0<SA)^0>SB)/END2'             ø
+  'C½-C' '¸END' 'END1:¸(SC=0)/END3' 'C½A MGSUMM C' 'QQ½ı1õQQ MGSUM 1'          ø
+  '¸END' 'END2:¸(SC=0)/END3' 'C½A MGSUMM-C' 'QQ½ı1õQQ MGSUM 1' '¸END'          ø
+X 'END3:QQ½ı1õQQ' 'END:Z½MGNCCO C' 'QQ½MGNCCO QQ'                              ø
+*(1995 12 16 19 41 55 632)                                                     ø
+ FMZREMN FX 'Z½X MZREMN Y;G'                                                  ø
+  'ä X,Y,Z are C-10-vectors; X,Y positive. Z is the remainder of X'            ø
+  'ä divided in Y . The integer quotient is saved in QQ .'                     ø
+  'ä speed faster than MZREM .'                                                ø
+  'ä 888  MZCNCO MGNCCO MGREMN MGSUMM  MGPRODN REEM REE' 'G½1000000'           ø
+X 'Z½MGNCCO(MZCNCO X)MGREMN MZCNCO Y' 'QQ½MGNCCO QQ'                           ø
+*(1995 12 16 19 53 20 540)                                                     ø
+ FMZREMP FX 'Z½X MZREMP Y;G'                                                  ø
+  'ä X,Y,Z are C-10-vectors; X nonnegative. Z is the remainder of X'           ø
+  'ä divided in Y . The integer quotient is saved in QQ .'                     ø
+  'ä 888  MZCNCO MGNCCO MGREM MGSUMM MGPRODZ MGPRODN REEM REE'                 ø
+X 'G½1000000' 'Z½MGNCCO(MZCNCO X)MGREM MZCNCO Y' 'QQ½MGNCCO QQ'                ø
+*(1995 12 16 22 22 17 416)                                                     ø
+ FMZSGN FX 'T½MZSGN A;M' 'ä A is a C-10-vector. T is its sign .'              ø
+  'M½''ı''=1ÆA½,A' 'DERR^/(A½MÇA)î''0123456789''' '¸(M=0)/NONNEG'              ø
+  '¸(M^^/Aî''0'')/ZERO' '¸0,T½ı1' 'NONNEG:¸(^/Aî''0'')/ZERO' '¸0,T½1'          ø
+X 'ZERO:T½0'                                                                   ø
+*(1995 12 16 20 20 22 420)                                                     ø
+ FMZSUM FX 'Z½X MZSUM Y'                                                      ø
+  'ä X,Y,Z are (signed) C-10-vectors. Z is the sum X plus Y .'                 ø
+X 'ä 888 MZCNCO MGNCCO MGSUMM REEM' 'Z½MGNCCO(MZCNCO X)MGSUMM MZCNCO Y'        ø
+*(1995 12 16 20 26 48 548)                                                     ø
+ FREE FX 'Z½REE X;Y' 'ä   X is a vector of nonnegative integers.'             ø
+  'ä   Z is a vector of G-digits with the same G-value.' 'Z½X'                 ø
+  'REK:¸(^/Z<G)/REKO' '¸REK,Z½(0,Y)+((Z-Y½G|Z)öG),0'                           ø
+X 'REKO:Z½(((0ôı1ÇZ)ì1)-IO)ÇZ'                                                ø
+*(1995 12 16 20 34 37 536)                                                     ø
+ FREEM FX 'Z½REEM X;S;T;Y;L'                                                  ø
+  'ä  X is a vector of integers. Z is a vector of signed G-digits with'        ø
+  'ä  the same G-value.' 'S½1' 'REK:¸(^/(X<G),Xò0)/REKO'                       ø
+  'S½SõT½1Æ(Lô0)/L½õX' '¸REK,X½(0,Y)+((X-Y½G|X½TõX)öG),0'                      ø
+X 'REKO:Z½Sõ(((0ôı1ÇX)ì1)-IO)ÇX'                                              ø
+*(1995 12 16 19 22 51 540)                                                     ø
+ FREEN FX 'Z½REEN V;Y;S'                                                      ø
+  'ä   V is a vector of integers, all either nonnegative or nonpositive.       ø
+ ' 'ä   Z is a vector of signed G-digits with the same G-value.'               ø
+  'S½(ı1)*1îVôZ½|V' 'REK:¸(^/Z<G)/REKO' '¸REK,Z½(0,Y)+((Z-Y½G|Z)öG),0'         ø
+X 'REKO:Z½Sõ(((0ôı1ÇZ)ì1)-IO)ÇZ'                                              ø
+*(1995 12 15 22 39 37 560)                                                     ø
+ FTIME FX 'Z½tr TIME F;T0;T1;I'                                               ø
+  'ä  Timer for function runs. Input F is a char.vector, consisting of t       ø
+ he'                                                                           ø
+  'ä  function name and arguments, separated by blanks as usual. Output        ø
+ is'                                                                           ø
+  'ä  the time in milliseconds for a run, averaged over tr runs. If no t       ø
+ r'                                                                            ø
+  'ä  is given, the default is assumed. The function value from the last       ø
+ ' 'ä  run is saved in the global variable XF .'                               ø
+  '¯(0=NC ''tr'')/''tr½1'' ä Default the TIME repetition' 'I½1' 'Z½ì0'        ø
+  'REK:T0½(100 60 60 1000)ı4ÆTS' ''''' EA ''XF½¯F'''                        ø
+  'T1½(100 60 60 1000)ı4ÆTS' 'Z½Z,T1-T0' '¸(tr>I½I+1)/REK'                   ø
+X 'Z½(öæZ)õ+/Z' 'äDT 12.2.87'                                                  ø
+*(1995 12 15 23 37 10 448)                                                     ø
+ FTINVERTP FX 'Z½PP TINVERTP R;X;Y;T;A;B;D;I;Q'                               ø
+  'ä   Z is the the inverse mod PP of the integer R' 'Y½PP' 'T½PP|R'           ø
+  'Z½B½1+D½A½I½0' 'REK:¸(0=X½T|Y)/END' 'Z½((A½Z)õQ½(Y-X)öT)+A'                 ø
+X 'D½((B½D)õQ)+B' 'Y½T' 'T½X' '¸REK,I½I+1' 'END:Z½PP|PP+Zõı1*I'                ø
+ NVMUL7 1 48 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89       ø
+  97 101 103 107 109 113 121 127 131 137 139 143 149 151 157 163 167 169       ø
+X 173 179 181 187 191 193 197 199 209 211                                      ø
+*(1995 12 16 20 10 1 296)                                                      ø
+ FZNDET FX 'D½ZNDET A;IO;V;J;W;Q'                                            ø
+  'ä  determinant of integer matrix using integer row operations mod NN'       ø
+  'DERR^/(NN<10000000),(,A=¾A),(2=ææA),=/æA½NN|A' 'D½IO½1'                    ø
+  '¸(0=1ÆæA)/0' 'LOOP:¸(1=1ÆæA)/END' 'BACK:¸(^/0=V½A[;1])/ZERO'                ø
+  'J½Vì¾/(Vô0)/V' '¸(J=1)/OK' 'A[1,J;]½A[J,1;]' 'D½NN|-D'                      ø
+  'OK:¸(^/0=W½1ÇA[;1])/ENDLP' 'Q½0,¾WöA[1;1]' 'A½NN|A-Qø.õA[1;]'               ø
+  '¸BACK' 'ENDLP:D½NN|DõA[1;1]' 'A½1 1ÇA' '¸LOOP' 'ZERO:¸D½0'                  ø
+X 'END:D½NN|DõA[1;1]'                                                          ø
