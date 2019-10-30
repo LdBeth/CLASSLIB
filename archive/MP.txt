@@ -1,0 +1,581 @@
+
+ John Sullivan <jos@scuk.demon.co.uk> has written this
+ Extended Precision workspace.  It uses Jim Weigang's
+ APLASCII Format.  This multiprecision workspace is
+ not quite vendor independent, in that it makes uses of 
+ quad-SIGNAL feature.  If your APL does not include this
+ feature, write change the "#SIGNAL" in the script to
+ "SIGNAL" and write a SIGNAL function of your own to do
+ what you think should be done.
+
+     {del} z{<-}d addprec z
+[1]   @ Add extra digits of precision to z (removing precision not allowed)
+[2]    {->}(d{<=}0)/0
+[3]    z{<-}(z[0]-d),(1{drop}z),d{rho}0
+     {del}
+
+     {<-}base{<-}100000000
+
+     {del} z{<-}binary x
+[1]   @ Convert a Multiprecision number to bits.
+[2]   @ The result of chbase must be an integer, not float, so be careful
+[3]    z{<-}(1073741824,base)chbase x
+[4]    z{<-}(z{iota}1){drop}z{<-},{transpose}(30{rho}2){represent}z{<-}1{+
+   +}{drop}z,z[0]{rho}0
+     {del}
+
+     {<-}bsqr{<-}10000
+
+     {del} z{<-}b chbase z;base;bsqr
+[1]   @ Change to radix b[0] from b[1]
+[2]    'Invalid radix specification'#SIGNAL(2{/=}{rho}b)/8
+[3]    {->}(=/b)/0
+[4]   @ If the new base is less than 32768 then we make base and bsqr the same
+[5]    {->}(b[0]{>=}32768)/{delta}1
+[6]    bsqr{<-}base{<-}{floor}b[0]
+[7]    {->}{delta}2
+[8]   {delta}1:'Radix not a square'#SIGNAL(0{/=}1|bsqr{<-}(base{<-}b[0])*0.{+
+   +}5)/8
+[9]    bsqr{<-}{floor}bsqr               @ Make sure that <bsqr> is an integer
+[10]  {delta}2:z{<-}b[1]frombase z
+     {del}
+
+     {del} z{<-}b dec x
+[1]   @ Similar to primitive Decode ({basevalue}) except
+[2]   @    left argument represents a single number
+[3]   @    right argument is a vector of numbers
+[4]    z{<-}0 0
+[5]   {delta}1:z{<-}({disclose}x)Fadd b Fmul z
+[6]    {->}(0{/=}{rho}x{<-}1{drop}x)/{delta}1
+     {del}
+
+     {del} z{<-}b enc x
+[1]   @ Similar to primitive Encode ({represent}) except
+[2]   @    only works on 1 multiprecision number at a time,
+[3]   @    left argument is a single number,
+[4]   @    left argument is assumed to repeat as often as required.
+[5]    z{<-}{zilde}
+[6]   {delta}1:{->}(b Fgt x)/{delta}2
+[7]    x{<-}x Idiv b
+[8]    z{<-}x[1],z
+[9]    x{<-}{disclose}x
+[10]   {->}{delta}1
+[11]  {delta}2:z{<-}({enclose}x),z
+     {del}
+
+     {del} z{<-}floor z
+[1]    {->}(z[0]{>=}0)/0
+[2]    z{<-}0,1{drop}z[0]{drop}z
+     {del}
+
+     {del} z{<-}b frombase y;a;f;q
+[1]   @ Converts numbers in radix <b> to base <base>
+[2]   @ b is a normal integer representing the new radix
+[3]    {->}(b{/=}base)/{delta}1
+[4]    z{<-}y & {->}0                @ Result is unchanged if the base is {+
+   +}unchanged
+[5]   {delta}1:z{<-}0 0                 @ Got to start somewhere
+[6]    {->}(base{>=}b)/{delta}2
+[7]    b{<-}(0,base){represent}b
+[8]   {delta}2:b{<-}0,b                 @ Old base in terms of new base
+[9]    f{<-}0{max}-y[0] & y[0]{<-}0{max}y[0]
+[10]   y{<-}1{drop}fullint y
+[11]  {delta}4:{->}(base{>=}q{<-}y[0])/{delta}5
+[12]   q{<-},(0,base){represent}q
+[13]  {delta}5:z{<-}(0,q)Fadd b Fmul z  @ Next digit
+[14]   {->}(0{/=}{rho}y{<-}1{drop}y)/{delta}4
+[15]   {->}(f=0)/0
+[16]   z{<-}z Fdiv b Fspow f
+     {del}
+
+     {del} z{<-}fullint z
+[1]   @ Make a full integer out of z
+[2]    {->}(0>1{take}z)/0
+[3]    z{<-}0,(1{drop}z),(1{take}z){rho}0
+     {del}
+
+     {del} a{<-}scalar a
+[1]   @ Add a leading zero if a number is a scalar
+[2]    a{<-}((1={rho}a{<-},a)/0),a
+     {del}
+
+     {del} z{<-}a ADD b;#IO
+[1]   @ Multiprecision add, character or numeric input
+[2]    #IO{<-}0 & z{<-}0 Ffmt{pick}Fadd/Fexec{each}a b
+     {del}
+
+     {del} z{<-}a DIV b;p;q;r;#IO
+[1]   @ Multiprecision floating point division, character input
+[2]    #IO{<-}0 & b{<-}mp.Fexec b
+[3]   @          Default A is 1, with extra precision
+[4]    {->}(^/~a{epsilon}#AV)/{delta}3               @ If numeric input {+
+   +}then do nothing
+[5]   @ Allow increased precision in a by means of the Pxx syntax
+[6]    p{<-}0 & {->}('P'^.{/=}a)/{delta}2          @ No p, so no action
+[7]    p{<-}(1+r{<-}a{iota}'P'){drop}a & a{<-}r{take}a      @ a holds {+
+   +}number, p precision
+[8]    {->}(0{/=}{rho}p{<-}(p{epsilon}#D)/p)/{delta}1
+[9]    p{<-}0 & {->}{delta}2                    @ numbers only
+[10]  {delta}1:#SIGNAL(2<{rho}p)/16           @ and not too big, or we will {+
+   +}soon have WS FULL!
+[11]   p{<-}{execute}p
+[12]  {delta}2:a{<-}mp.Fexec a
+[13]   {->}(p{<=}0)/{delta}3
+[14]   a[0]{<-}a[0]-p & a{<-}a,p{rho}0        @ Extend precision
+[15]  {delta}3:z{<-}0 Ffmt a Fdiv b
+     {del}
+
+     {del} z{<-}a Fadd b;d;m;s
+[1]   @ Add two multiprecision numbers
+[2]    a{<-}scalar a & b{<-}scalar b       @ Add leading 0 if a scalar
+[3]    a{<-}a,(0{max}a[0]-b[0]){rho}0           @ Make both 'numbers' the {+
+   +}same length
+[4]    b{<-}b,(0{max}b[0]-a[0]){rho}0
+[5]    d{<-}a[0]{min}b[0]                   @ Save the position of the {+
+   +}radix point
+[6]    a{<-}1{drop}a & b{<-}1{drop}b & m{<-}-({rho}a){max}{rho}b
+[7]    {->}(0{/=}s{<-}{signum}1{take}(z{/=}0)/z{<-}(m{take}a)+m{take}b)/{+
+   +}{delta}1
+[8]    z{<-}0 0 & {->}0                    @ Zero value
+[9]   {delta}1:z{<-}s{times}z                       @ Make value positive
+[10]  {delta}2:{->}(0^.=(z{<-}(0,base){represent}z)[0;])/{delta}3
+[11]   z{<-}(z[0;],0)+0,z[1;] & {->}{delta}2     @ Carry
+[12]  @
+[13]  {delta}3:z{<-}s{times}z[1;] & z{<-}((z{/=}0){iota}1){drop}z   @ Sign, {+
+   +}then Drop leading zeroes
+[14]   z{<-}(d+m),(-m{<-}(0{/=}{reverse}z){iota}1){drop}z       @ Drop {+
+   +}trailing zeroes
+     {del}
+
+     {del} a{<-}a Fdiv b;d;r
+[1]   @ Multiprecision floating point divide
+[2]    a{<-}scalar a & b{<-}scalar b       @ Add leading 0 if a scalar
+[3]    #SIGNAL(0^.=1{drop}b)/11           @ Domain error if divisor is zero
+[4]    {->}(0^.=1{drop}a)/0                  @ Quick quit if result is zero
+[5]   @ The next line may be considered controversial
+[6]    a{<-}({neg}1+{rho}b)addprec a            @ Increase precision of the {+
+   +}dividend
+[7]    d{<-}a[0],b[0]
+[8]    a{<-}0,1{drop}a & b{<-}0,1{drop}b
+[9]    a r{<-}a Idiv b                  @ Do an integer divide
+[10]   {->}(b Fgt r Fmul 0 2)/{delta}1
+[11]   a{<-}a Fadd 0 1                  @ Round up if necessary
+[12]  {delta}1:a{<-}fullint a                 @ Maintain precision
+[13]   a[0]{<-}-/d                      @ Position radix point
+     {del}
+
+     {del} z{<-}x Fequal y
+[1]   @ Multiprecision X = Y
+[2]    z{<-}0^.=x Fsub y
+     {del}
+
+     {del} x{<-}Fexec x;e;f;i;n;p;p1;p10;q;s
+[1]   @ Convert character numbers to multiprecision internal format
+[2]    {->}(~(1{take}x){epsilon}#AV)/0                 @ Exit if already {+
+   +}numeric
+[3]   @ For this function the radix must be a power of 10
+[4]   @ If it isn{'}t then make it 10*8
+[5]    {->}(p10{<-}0=1|p{<-}10{log}base)/{delta}1         @ Is radix a {+
+   +}power of 10?
+[6]    p{<-}8                             @ No. Make it 100,000,000
+[7]   {delta}1:p1{<-}(p+1){divide}p{<-}{floor}p                 @ Make p an {+
+   +}integer, save (p+1){divide}p
+[8]    {->}(0=e{<-}+/n{<-}x{epsilon}'Ee')/{delta}2            @ Any E in {+
+   +}the number?
+[9]    #SIGNAL(1{/=}e)/11                 @ Domain error if more than one
+[10]   q{<-}n{iota}1
+[11]   e{<-}(q+1){drop}x & x{<-}q{take}x
+[12]   e{<-}('+'=1{take}e){drop}e                   @ drop leading plus {+
+   +}sign from e
+[13]  @ The exponent must be numeric, with an optional leading minus
+[14]   #SIGNAL(~^/(e{epsilon}#D){or}({rho}e){take}(1{take}e){epsilon}'{neg}-{+
+   +}')/11
+[15]   e{<-}(e{epsilon}#D,'-{neg}')/e                 @ Ignore invalid {+
+   +}characters
+[16]   e{<-}{execute}e                            @ make numeric (crashes {+
+   +}if bare minus)
+[17]  {delta}2:x{<-}(x{epsilon}#D,'.-{neg}')/x              @ Ignore {+
+   +}invalid characters
+[18]   x{<-}(s{<-}x[0]{epsilon}'-{neg}'){drop}x               @ Negative No.{+
+   +} if s=1. Drop minus sign
+[19]   {->}(0={rho}x)/0                       @ Quick quit if null input (= {+
+   +}zero)
+[20]   i{<-}(q{<-}x{iota}'.'){take}x                   @ Integer part
+[21]   {->}(0={rho}f{<-}(q+1){drop}x)/{delta}3              @ Fractional part
+[22]   #SIGNAL(f{or}.='.')/11             @ Only one decimal point allowed
+[23]  {delta}3:x{<-}{zilde}
+[24]   {->}(0={rho}i)/{delta}4
+[25]   x{<-}x,{execute}({reverse}({floor}p1{times}{rho}i){rho}(p+1){take}p{+
+   +}{rho}1)\i    @ Convert integer part to numerics
+[26]  {delta}4:{->}(0{/=}{rho}f)/{delta}5
+[27]   f{<-}{zilde} & {->}{delta}6
+[28]  {delta}5:f{<-},{execute}((p1{times}{rho}f){rho}(p+1){take}p{rho}1)\f{+
+   +}{<-}f,(p|-{rho}f){rho}'0'
+[29]  {delta}6:{->}(0^.=x{<-}(-{rho}f),1 {neg}1[s]{times}x,f)/0  @  Put it {+
+   +}all together, quit if zero
+[30]   x{<-}(-f{<-}(0{/=}{reverse}x){iota}1){drop}x
+[31]   f{<-}x[0]+f                        @ Drop trailing zeroes
+[32]   x{<-}f,((x{/=}0){iota}1){drop}x{<-}1{drop}x             @ Drop {+
+   +}leading zeroes
+[33]   {->}p10/{delta}7
+[34]   x{<-}(base,100000000)chbase x      @ Change to current radix
+[35]  {delta}7:{->}(1+{signum}e){pick}{delta}8,0,{delta}9
+[36]  {delta}8:x{<-}x Fmul Fexec'0.',(({neg}1-e){rho}'0'),'1' & {->}{delta}9
+[37]  {delta}9:x{<-}x Fmul Fexec'1',e{rho}'0'
+[38]  {delta}9:
+     {del}
+
+     {del} z{<-}{leftbrace}h{rightbrace}Ffmt a;b;x;k;n;p;s
+[1]   @ Format a multiprecision number
+[2]   @ H says How: if not supplied then include spaces every p digits
+[3]   @ where p is the size of the base, otherwise every h digits.
+[4]   @ If h is negative use commas instead of spaces.
+[5]   @ For normal thousand commas, h is {neg}3.
+[6]    {->}(0=1|p{<-}10{log}base)/{delta}1                @ Radix must be a {+
+   +}power of 10
+[7]    a{<-}(100000000,base)chbase a & p{<-}8   @ so make it one
+[8]   {delta}1:n{<-}a[0] & a{<-}1{drop}a & p{<-}{floor}p            @ Make {+
+   +}P integer
+[9]    a{<-}(-s{<-}(0{/=}{reverse}a){iota}1){drop}a & n+{<-}s           @ {+
+   +}Drop trailing zeroes
+[10]   {->}(n{<=}0)/{delta}2
+[11]   a{<-}a,n{rho}0 & n{<-}0                      @ Now put them back if {+
+   +}appropriate
+[12]  {delta}2:{->}(0{/=}s{<-}{signum}1{take}a{<-}((a{/=}0){iota}1){drop}a)/{+
+   +}{delta}3       @ Sign
+[13]   z{<-}'0' & {->}0                         @ Exit if 0
+[14]  {delta}3:a{<-}|a                             @ Make positive
+[15]   {->}(n{>=}0)/{delta}4
+[16]   a{<-}(n{min}-{rho}a){take}a                        @ Put leading 0s {+
+   +}back if appropriate
+[17]  {delta}4:z{<-},' ',('ZI',{format}p)#FMT a
+[18]   {->}(n{>=}0)/{delta}5
+[19]   z[({rho}z)+n{times}p+1]{<-}'.'                  @ Decimal point
+[20]  {delta}5:z{<-}(' '=z[0]){drop}z                   @ Drop leading blank
+[21]   z{<-}((z{/=}'0'){iota}1){drop}z                    @ Drop leading {+
+   +}zeroes
+[22]   z{<-}(('.'=z[0])/'0'),z                @ .1 {->} 0.1
+[23]   z{<-}((s<1)/'-'),z                    @ Negative sign
+[24]  @ If we have a decimal point, drop trailing zeroes
+[25]   {->}(~'.'{epsilon}z)/{delta}6
+[26]   z{<-}(-('0'{/=}{reverse}z){iota}1){drop}z
+[27]  {delta}6:{->}(0=#NC'h')/0                    @ If H not supplied then {+
+   +}quit
+[28]   {->}(h=p{times}1 {neg}1)/0,{delta}8                   @ We already {+
+   +}have spaces every P digits!
+[29]   z{<-}z~' '                            @ Get rid of all spaces
+[30]   {->}(0=k{<-}|h)/0                        @ Exit if H=0
+[31]   n{<-}z{iota}'.'                            @ Where is the decimal {+
+   +}point?
+[32]   s{<-}{reverse}({floor}n{times}b{<-}(k+1){divide}k){rho}c{<-}(k{rho}1){+
+   +},0        @ For numbers before the decimal point
+[33]   {->}(n={rho}z)/{delta}7                         @ No decimal point
+[34]   s{<-}s,1,({floor}(({rho}z)-n+1){times}b){rho}c            @ Numbers {+
+   +}after the decimal point
+[35]  {delta}7:z{<-}s\z                            @ Space out as required
+[36]   z{<-}(' '=z[0]){drop}z                     @ Drop resulting leading {+
+   +}blank
+[37]   z{<-}(-' '={neg}1{take}z){drop}z                    @ ... and {+
+   +}trailing blank
+[38]   {->}('- '{or}.{/=}2{take}z)/{delta}8                   @ blank {+
+   +}between - and number?
+[39]   z{<-}'-',2{drop}z                          @ Yes: get rid of the blank
+[40]  {delta}8:{->}(h{>=}0)/0
+[41]   z[(z=' ')/{iota}{rho}z]{<-}','                 @ Commas, if H was {+
+   +}negative
+     {del}
+
+     {del} z{<-}x Fgt y
+[1]   @ Multiprecision X > Y
+[2]   @ Can be used for all the ordering functions, as follows:
+[3]   @   For X<Y use   Y gt X
+[4]   @   For X{<=}Y use  ~X gt Y
+[5]   @   For X{>=}Y use  ~Y gt X
+[6]    z{<-}0{or}.>1{drop}y Fsub x
+     {del}
+
+     {del} z{<-}a Fmul b;da;db;noconv;s;sa;sb
+[1]   @ Multiply two numeric multiprecision numbers
+[2]    a{<-}scalar a & b{<-}scalar b       @ Add leading 0 if a scalar
+[3]    da{<-}a[0] & db{<-}b[0]             @ Decimal places
+[4]    sa{<-}{signum}1{take}a{<-}((a{/=}0){iota}1){drop}a{<-}1{drop}a       {+
+   +}@ Sign of A
+[5]    sb{<-}{signum}1{take}b{<-}((b{/=}0){iota}1){drop}b{<-}1{drop}b       {+
+   +}@ Sign of b
+[6]    {->}(0{/=}s{<-}sa{times}sb)/{delta}1               @ Sign of the result
+[7]    z{<-}0 0 & {->}0                    @ Quick quit if result is zero
+[8]   {delta}1:a{<-}|a & b{<-}|b                 @ Make numbers positive
+[9]    {->}(({rho}b){>=}{rho}a)/{delta}2
+[10]   a b{<-}b a                       @ Prevent avoidable WS FULL
+[11]  {delta}2:{->}(noconv{<-}base=bsqr)/{delta}3
+[12]   a{<-},{transpose}(0,bsqr){represent}|a               @ Prevent overflow
+[13]   b{<-},{transpose}(0,bsqr){represent}|b
+[14]  {delta}3:z{<-}+{slashbar}(-1+{iota}1{take}{rho}z){rotate}z,(2{rho}1{+
+   +}{take}{rho}z{<-}a{jot}.{times}b){rho}0 @ Raw result
+[15]  @ Refine result by 'carrying'
+[16]  {delta}4:{->}((a{<-}(0,bsqr){represent}z)[0;]^.=0)/{delta}5
+[17]   z{<-}(a[0;],0)+0,a[1;]
+[18]   {->}{delta}4
+[19]  {delta}5:{->}noconv/{delta}6
+[20]   z{<-}((2|{rho}z){rho}0),z                @ Make Z an even number of {+
+   +}elements
+[21]   z{<-}(0,bsqr){basevalue}{transpose}((0.5{times}{rho}z),2){rho}z    @ {+
+   +}Get Z back to full size
+[22]  {delta}6:z{<-}s{times}((z{/=}0){iota}1){drop}z             @ Drop {+
+   +}leading zeroes, get sign right
+[23]   da{<-}da+db                      @ Number of 'decimals'
+[24]   z{<-}(-db{<-}(0{/=}{reverse}z){iota}1){drop}z            @ Drop {+
+   +}trailing zeros
+[25]   z{<-}(da+db),z                   @ Prepend number of decimals
+     {del}
+
+     {del} z{<-}m Fspow x;i;n;q;rem
+[1]   @ This function raises multiprecision <m> to the power of scalar <x>
+[2]   @ for small values of x (otherwise we get WS FULL, and other rubbish)
+[3]   @ For the method see Ribenboim [1988] p.38
+[4]    {->}(2{/=}{rho},x)/{delta}1
+[5]    {->}(0{/=}1{take}x)/{delta}1
+[6]    x{<-}x[1]                           @ Allow small M.P.integers
+[7]   {delta}1:#SIGNAL((^/x{epsilon}#AV){or}1{/=}{rho},x)/11    @ Correct {+
+   +}domain for X
+[8]    #SIGNAL(x{<=}0)/11                  @ Must be strictly positive
+[9]    z{<-}m                              @ Start value for result
+[10]   {->}(1={rho}n{<-}(({ceiling}2{log}1+x){rho}2){represent}x)/0
+[11]   i{<-}1
+[12]  {delta}2:z{<-}z Fmul z
+[13]   {->}(~n[i])/{delta}3
+[14]   z{<-}z Fmul m
+[15]  {delta}3:{->}(({rho}n)>i{<-}i+1)/{delta}2
+     {del}
+
+     {del} z{<-}Fsqrt a;b;d;r
+[1]   @ Multiprecision floating point square root
+[2]    a{<-}scalar a                    @ Add leading 0 if a scalar
+[3]    #SIGNAL(0^.>a)/11             @ Domain error if argument is negative
+[4]    {->}(0{or}.{/=}1{drop}a)/{delta}1                 @ Is source number {+
+   +}zero?
+[5]    z{<-}0 0 & {->}0                    @ Quick quit if result is zero
+[6]   {delta}1:{->}(~2|d{<-}a[0])/{delta}2             @ Save radix places
+[7]    d{<-}d-1 & a{<-}a,0                 @ No. of radix places must be even
+[8]   {delta}2:z r{<-}Isqrt 0,1{drop}a             @ Integer square root
+[9]    {->}(~r Fgt z)/{delta}4
+[10]   z{<-}z Fadd 0 1                  @ Round up if necessary
+[11]  {delta}4:z[0]+{<-}{floor}0.5{times}d                @ Position radix {+
+   +}point
+     {del}
+
+     {del} z{<-}a Fsub b
+[1]   @ Multiprecision subtraction
+[2]    z{<-}a Fadd(1{take}b),-1{drop}b{<-}scalar b
+     {del}
+
+     {del} z{<-}FSQRT x;#IO
+[1]    #IO{<-}0 & z{<-}0 Ffmt Fsqrt Fexec x
+     {del}
+
+     {del} z{<-}a Gcd b
+[1]   @ Euclid's algorithm for the gcd of 2 numbers
+[2]    {->}(1^.=({rho}a),{rho}b)/{delta}2            @ Quick method if both {+
+   +}scalars
+[3]    {execute}(b Fgt a)/'a b{<-}b a'
+[4]   {delta}1:{->}(0 1 Fequal z{<-}a Imod b)/0
+[5]    {execute}(0 0 Fequal z)/'z{<-}b & {->}0'
+[6]    {execute}(0 Fgt z)/'z{<-}z Fadd b'
+[7]    a{<-}b & b{<-}z & {->}{delta}1
+[8]   @
+[9]   {delta}2:{execute}(b>a)/'a b{<-}b a'
+[10]  {delta}3:{->}(1=z{<-}b|a)/0
+[11]   {execute}(0=z)/'z{<-}b & {->}0'
+[12]   {execute}(0>z)/'z{<-}z+b'
+[13]   a{<-}b & b{<-}z & {->}{delta}3
+     {del}
+
+     {<-}HALF{<-}{neg}6 50000000 0 0 0 0 0
+
+     {del} c{<-}a Idiv b;af;bf;j;q;qf;q1;r;r1;s;t
+[1]   @ Multiprecision integer divide with remainder
+[2]   @ Produces quotient {&} remainder in c
+[3]    a{<-}scalar a & b{<-}scalar b       @ Add leading 0 if a scalar
+[4]    #SIGNAL(0{or}.>a[0],b[0])/11     @ Domain error if not integer
+[5]    #SIGNAL(0^.=1{drop}b)/11           @ Domain error if divisor is zero
+[6]    {->}(0{or}.{/=}1{drop}a)/{delta}1
+[7]    c{<-}(0 0)(0 0) & {->}0             @ Quick quit if result is zero
+[8]   {delta}1:s{<-}1 {neg}1[(a{or}.<0){/=}b{or}.<0]       @ Sign of result
+[9]    a{<-}fullint|a & b{<-}fullint|b
+[10]   {->}(2{/=}{rho}b)/{delta}3                    @ Code for speed if B {+
+   +}is scalar
+[11]   {->}c{<-}(2{times}(b{<-}1{drop}b)=1{take}r{<-}0,1{take}a){rho}0
+[12]  {delta}2:c{<-}c,q{<-}{floor}(t{<-}base{basevalue}r,1{take}a){divide}b
+[13]   r{<-}0,t-q{times}b & {->}(0<{rho}a{<-}1{drop}a)/{delta}2
+[14]   c{<-}c Fadd 0 & {->}{delta}99             @ ... and tidied up
+[15]  @ B is not scalar.
+[16]  {delta}3:r{<-}a & c{<-}0 0                 @ Start by creating remainder
+[17]   bf{<-}b[1]+b[2]{divide}base             @ Floating point divisor
+[18]  {delta}4:{->}(b Fgt r)/{delta}99              @ If b>r then we are done
+[19]  {delta}5:af{<-}r[1]
+[20]   {->}(2{>=}{rho}r)/{delta}6
+[21]   af{<-}af+r[2]{divide}base
+[22]  {delta}6:q{<-}{floor}qf{<-}af{divide}bf & j{<-}0           @ Q is the {+
+   +}provisional quotient
+[23]   {->}(1{/=}qf)/{delta}7
+[24]   q{<-}r Fgt({rho}r){take}b                 @ Get more accurate result {+
+   +}if =1
+[25]  {delta}7:{->}(0{/=}q)/{delta}8
+[26]   q{<-}{floor}qf{<-}qf{times}base & j{<-}1           @ if Q=0 shift 1 {+
+   +}place right
+[27]  {delta}8:r1{<-}r Fsub b Fmul q1{<-}(2+({rho}r)-j+{rho}b){take}q1{<-}0,{+
+   +}{floor}q
+[28]   {->}(~0 Fgt r1)/{delta}9
+[29]   q{<-}q-1 & {->}{delta}8
+[30]  {delta}9:c{<-}c Fadd q1 & r{<-}0,(1{drop}r1),r1[0]{rho}0
+[31]  @ It may be that our truncation of the provisional quotient has
+[32]  @ resulted in <r>=<b>, so
+[33]   {->}(~b Fequal r)/{delta}10
+[34]   r{<-}0 0 & c{<-}c Fadd 1
+[35]  {delta}10:{->}{delta}4
+[36]  {delta}99:c{<-}(c{times}1,({neg}1+{rho}c){rho}s)(r{times}1,({neg}1+{+
+   +}{rho}r){rho}s)
+     {del}
+
+     {del} a{<-}x Imod b;b1;j;q;qf;s
+[1]   @ Multiprecision integer modulus function
+[2]    x{<-}scalar x & b{<-}scalar b      @ Allow scalar B
+[3]    #SIGNAL(0{or}.>b[0],x[0])/11    @ Must be integers
+[4]    s{<-}0 & a{<-}x
+[5]    {->}(2<{rho},b{<-}fullint b)/{delta}1
+[6]    {->}(b[1]{<=}bsqr)/{delta}7
+[7]   {delta}1:b1{<-}b[1]+(3{take}b)[2]{divide}base
+[8]   {delta}2:{->}(~0 0 Fgt a)/{delta}3
+[9]    a{<-}|a & s{<-}~s                  @ Do everything positively
+[10]  {delta}3:#SIGNAL(a Fgt|x)/11        @ Program error if this fires
+[11]   {->}(~(a Fgt 0 {neg}1)^b Fgt a)/{delta}5
+[12]   {->}(~s^~a Fequal 0 0)/{delta}4
+[13]   a{<-}b Fsub a
+[14]  {delta}4:{->}0
+[15]  {delta}5:q{<-}{floor}qf{<-}(a[1]+(3{take}a)[2]{divide}base){divide}b1
+[16]   j{<-}0
+[17]   {->}(0{/=}q)/{delta}6
+[18]   q{<-}{floor}qf{<-}qf{times}base & j{<-}1          @ If Q=0 then {+
+   +}shift 1 place right
+[19]  {delta}6:a{<-}a Fsub q Fmul(a[0]+({rho}a)-j){take}b
+[20]   {->}{delta}2
+[21]  @
+[22]  {delta}7:b{<-}b[1] & x{<-}fullint x
+[23]   a{<-}x[1] & x{<-}2{drop}x
+[24]  {delta}8:a{<-}b|a
+[25]   {->}(0={rho}x)/{delta}9
+[26]   a{<-}base{basevalue}a,1{take}x
+[27]   x{<-}1{drop}x
+[28]   {->}{delta}8
+[29]  {delta}9:{->}(~s^0{/=}a)/{delta}10
+[30]   a{<-}b-a
+[31]  {delta}10:a{<-}0,a
+     {del}
+
+     {del} z{<-}m Impow x;i;mod;n;q;r
+[1]   @ This function raises multiprecision M to the power of
+[2]   @ multiprecision X[0] and returns the residue modulo X[1]
+[3]   @ For the method see Ribenboim [1988] p.38
+[4]    x mod{<-}x                               @ separate the parameters
+[5]    z{<-}1                                   @ Result if power is 0
+[6]    {->}(0={rho}n{<-}binary x)/0                    @ Get binary version {+
+   +}of power
+[7]    z{<-}m                                   @ Start with number
+[8]    {->}(1={rho}n)/0                             @ Exit if power is 1
+[9]    i{<-}1
+[10]  {delta}1:z{<-}z Fmul z                          @ Square Z
+[11]   {->}(~n[i])/{delta}2                           @ If the next bit is {+
+   +}set ...
+[12]   z{<-}z Fmul m                            @ ... multiply by M
+[13]  {delta}2:z{<-}z Imod mod                        @ Residue modulo mod
+[14]   {->}(({rho}n)>i{<-}i+1)/{delta}1                      @ Any more bits
+     {del}
+
+     {del} z{<-}x Inv_mod n;a;b;N;rn;r0;r1
+[1]   @ Calculate the multiplicative inverse of x mod n
+[2]   @ If the inverse does not exist, return 0
+[3]    a{<-}{zilde} & N{<-}n
+[4]    {->}(1{or}.{/=}({rho}x),{rho}n)/{delta}10
+[5]    z{<-}0 & x{<-}N|x
+[6]   {delta}1:a{<-}a,{disclose}b{<-}(0,x){represent}n
+[7]    n{<-}x & {->}(0{/=}x{<-}1{pick}b)/{delta}1
+[8]   @ At this point n holds the GCD of the original n and x. If this is {+
+   +}not 1
+[9]   @ then there is no multiplicative inverse.
+[10]   {->}(1{/=}n)/0
+[11]   r0{<-}1 0 & r1{<-}0 1
+[12]  @ Recurrence relation is r(n)=r(n-2)-q.r(n-1)
+[13]  @    i.e.                 rn {<-}  r0  - ({disclose}a).r1
+[14]  {delta}3:rn{<-}r0-r1{times}{disclose}a
+[15]   r0{<-}r1 & r1{<-}rn & a{<-}1{drop}a
+[16]   {->}(1<{rho}a)/{delta}3
+[17]   z{<-}N|1{pick}rn & {->}0
+[18]  @ Multiprecision version
+[19]  {delta}10:z{<-}0 0 & x{<-}x Imod N
+[20]  {delta}11:a{<-}a,(b{<-}n Idiv x)[0]
+[21]   n{<-}x & {->}(~0 0 Fequal x{<-}1{pick}b)/{delta}11
+[22]   {->}(~0 1 Fequal n)/0
+[23]   r0{<-}(0 1)(0 0) & r1{<-}(0 0)(0 1)
+[24]  {delta}13:rn{<-}r0 Fsub{each}r1 Fmul{each}a[0]
+[25]   r0{<-}r1 & r1{<-}rn & a{<-}1{drop}a
+[26]   {->}(1<{rho}a)/{delta}13
+[27]   z{<-}(1{pick}rn)Imod N
+     {del}
+
+     {del} z{<-}Isqrt a;b;f;n;q;r
+[1]   @ Integer square root by Newton-Raphson iteration
+[2]    a{<-}scalar a                     @ Add leading 0 if a scalar
+[3]    #SIGNAL(0{or}.>a)/11              @ Domain error if negative or not {+
+   +}integer
+[4]    {->}(0{or}.{/=}1{drop}a)/{delta}1
+[5]    z{<-}(0 0)(0 0) & {->}0              @ Quick quit if result is zero
+[6]   {delta}1:a{<-}fullint a                  @ Full precision number
+[7]    {->}(3<{rho}a)/{delta}2                     @ Special code for speed {+
+   +}if A is small
+[8]    z{<-}0,{floor}(base{basevalue}a)*0.5 & {->}{delta}8        @ Result
+[9]   @ Get an accurate starting value
+[10]  {delta}2:n{<-}({rho}a){min}(2|{rho}a)+2{times}1{max}{floor}8{divide}10{+
+   +}{log}base   @ How many digits do we take
+[11]   z{<-}(n{<-}1+{floor}0.5{times}{rho}a){take}0 Fadd{min}(base{+
+   +}{basevalue}n{take}a)*0.5
+[12]   {->}(0 0{match}r{<-}a Fsub z Fmul z)/{delta}9    @ Have we hit upon {+
+   +}the sq. root straight away?
+[13]  @ z is our first guess at the square root
+[14]  {delta}3:b{<-}z Fadd(a Fsub z Fmul z)Fdiv z Fmul 2
+[15]   {execute}(b[0]<{neg}2)/'b{<-}{neg}2,1{drop}(2+b[0]){drop}b'
+[16]   {->}((floor b)Fequal floor z)/{delta}4
+[17]   z{<-}b & {->}{delta}3
+[18]  {delta}4:{execute}(0>z[0])/'z{<-}floor z'
+[19]  {delta}8:r{<-}a Fsub z Fmul z            @ Square-root remainder
+[20]  {delta}9:z{<-}z r
+     {del}
+
+     {del} z{<-}ISQRT x;#IO
+[1]    #IO{<-}0 & z{<-}0 Ffmt{each}Isqrt Fexec x
+     {del}
+
+     {del} z{<-}a Lcm b
+[1]   @ Least common multiple of 2 numbers
+[2]    {->}(1^.=({rho}a),{rho}b)/{delta}2            @ Quick method if both {+
+   +}scalars
+[3]    z{<-}{disclose}(a Fmul b)Idiv a Gcd b
+[4]    {->}0
+[5]   {delta}2:z{<-}(a{times}b){divide}a Gcd b
+     {del}
+
+     {<-}MINUSONE{<-}{neg}5 {neg}1 0 0 0 0 0
+
+     {del} z{<-}a MUL b;#IO
+[1]   @ Multiprecision multiply
+[2]    #IO{<-}0 & z{<-}0 Ffmt{pick}Fmul/Fexec{each}a b
+     {del}
+
+     {<-}ONE{<-}{neg}5 1 0 0 0 0 0
+
+     {del} z{<-}{leftbrace}a{rightbrace}SUB b;#IO
+[1]   @ Multiprecision subtract
+[2]    #IO{<-}0
+[3]    {->}(0{/=}#NC'a')/{delta}1
+[4]    a{<-}0 0                  @ Allow monadic call, which just negates b
+[5]   {delta}1:z{<-}0 Ffmt{pick}Fsub/Fexec{each}a b
+     {del}
