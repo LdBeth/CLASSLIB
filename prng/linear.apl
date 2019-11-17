@@ -10,3 +10,11 @@
   AK←A*K
   R←M|((AK-1)×C÷B)+AK×X
 ∇
+
+∇R←NAG X;C;A;M
+  C←0
+  A←13*13
+  M←2*59
+  R←LCG0 X
+  R÷M
+∇
