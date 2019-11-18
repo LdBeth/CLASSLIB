@@ -18,7 +18,7 @@
   R←1=L+R
 ∇
 
-∇R←A ADD B;C;O
+∇R←A ADD B;C
   ⍝ BINARY ADDITION
   →NOTEST/BEGIN
   DERR∧/(A=A=1)∧B=B=1
@@ -27,11 +27,11 @@ BEGIN:
   OVERFLOW←0
 LOOP:A←A+B
   ⍝ FIND CARRY
-  C←1<A
+  C←2=A
   →(0=+/C)/END
-  A[⍸C]←0
+  A[C/⍳⍴C]←0
   ⍝ CHECK OVERFLOW
-  OVERFLOW←OVERFLOW∨1=''⍴O
+  OVERFLOW←OVERFLOW∨1=''⍴C
   B←(⍴C)↑1↓C
   →LOOP
 END:
