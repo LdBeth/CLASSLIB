@@ -9,7 +9,8 @@ as MACSYMA of MacLisp.
 
 # Project goal(s)
 Create an archive for CLASSLIB in a implementation independent format that should
-take trvival efforts to port to any APL2 compatible implementations.
+take trvival efforts to port to any APL2 compatible implementations (if UTF-8 is
+supported or encoding conversion can be done).
 
 # TODO list
 
