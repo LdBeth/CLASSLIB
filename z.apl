@@ -1,4 +1,3 @@
-
 ∇P←ZFACTOR N;Q;R;⎕IO
   ⍝ FACTORS A POSITIVE INTEGER INTO A PRODUCT OF PRIMES.
   ⍝ THE RESULT IS CORRECT IF  N  IS LESS THAN 2.5E9.
@@ -75,8 +74,6 @@ BEGIN:C←(⌊A÷|B)××B
 BEGIN:C←(|A)|B
 ∇
 
-
-
 ∇C←A ZCHREM B;⎕IO;r;s;RHO;D;L;M;N;B1;B2;A1;F;E;X
   ⍝ SOLVES THE SIMULTANEOUS CONGRUENCE  C  CONGRUENT
   ⍝ TO THE I-TH CROSS SECTION OF  A  ALONG THE LAST AXIS
@@ -111,8 +108,122 @@ LOOP:→((0=⍴Q)∨N<(1↑Q)*2)/END
 END:P←(N≥P)/P←P,Q
 ∇
 
+∇D←ZDET A;⎕IO;V;J;W;Q
+  ⍝ COMPUTES THE DETERMINANT OF AN INTEGER MATRIX
+  ⍝ USING INTEGER ROW OPERATIONS.
+  DERR∧/(,A=⌊A),(2=⍴⍴A),=/⍴A
+  D←⎕IO←1
+  →(0=1↑⍴A)/0
+LOOP:→(1=1↑⍴A)/END
+BACK:→(∧/0=V←|A[;1])/ZERO
+  J←V⍳⌊/(V≠0)/V
+  →(J=1)/OK
+  A[1,J;]←A[J,1;]
+  D←-D
+OK:→(∧/0=W←1↓A[;1])/ENDLP
+  Q←0,(⌊W÷|A[1;1])××A[1;1]
+  A←A-Q∘.×A[1;]
+  →BACK
+ENDLP:D←D×A[1;1]
+  A←1 1↓A
+  →LOOP
+ZERO:→D←0
+END:D←D×A[1;1]
+∇
+
 ∇C←A ZLCM B
   ⍝ COMPUTES THE ENTRY-BY-ENTRY LCM OF THE
   ⍝ INTEGER ARRAYS  A  AND  B.
   C←(C≠0)×⌊(C←|A×B)÷A ZGCD0 B
+∇
+
+∇C←A ZLSYS B;⎕IO;M;D;Q;r;s
+  ⍝ SOLVES LINEAR SYSTEMS OVER THE INTEGERS.
+  ⍝ A  IS THE MATRIX OF COEFFICIENTS AND THE VECTORS
+  ⍝ OF CONSTANT TERMS ARE THE VECTORS ALONG THE FIRST
+  ⍝ AXIS OF  B.  THE ROWS OF THE GLOBAL ARRAY  w
+  ⍝ ARE A BASIS FOR THE SOLUTIONS OF THE CORRESPONDING
+  ⍝ HOMOGENEOUS SYSTEM.
+  ⎕IO←1
+  DERR∧/(2=⍴⍴A),(,A=⌊A),(,B=⌊B),(1≤⍴⍴B),(1↑⍴A)=1↑⍴B
+  D←(M←+/D≠0)↑D←1 1⍉A←ZREDUCE A
+  DERR∧/,0=(M,(¯1+⍴⍴B)⍴0)↓B←r+.×B
+  w←⍉(0,M)↓s
+  DERR∧/0=(Q←⍉(⌽⍴B)⍴D)|B←(M,1↓⍴B)↑B
+  C←(((1↑⍴s),M)↑s)+.×⌊B÷Q
+∇
+
+∇B←ZREDUCE A;⎕IO;I;J;K;L;M;Q;D;Y;Z;X;V
+  ⍝ REDUCES AN INTEGER MATRIX.  PRODUCES INVERTIBLE
+  ⍝ INTEGER MATRICES  r  AND  s  SUCH THAT  B  IS
+  ⍝ THE MATRIX PRODUCT OF  r,  A  AND  s.
+  ⎕IO←0
+  DERR∧/(2=⍴⍴A),,B=⌊B←A
+  r←(K,K)⍴1,(K←1↑⍴B)⍴0
+  s←(L,L)⍴1,(L←1↓⍴B)⍴0
+  I←¯1
+LOOPI:→(∧/0=D←|,(I,I←I+1)↓B)/0
+  V←I+((⍴B)-I)⊤D⍳⌊/(D≠0)/D
+  X←B[J←V[0];K←V[1]]
+COL:→(∧/0=D←|X|B[;K])/ROW
+  L←D⍳⌊/(D≠0)/D
+  B[L;]←B[L;]-(Q←⌊(B[L;K]-X|B[L;K])÷X)×B[J;]
+  r[L;]←r[L;]-Q×r[J;]
+  X←B[J←L;K]
+  →COL
+ROW:→(∧/0=D←|X|B[J;])/GENERAL
+  M←D⍳⌊/(D≠0)/D
+  B[;M]←B[;M]-(Q←⌊(B[J;M]-X|B[J;M])÷X)×B[;K]
+  s[;M]←s[;M]-Q×s[;K]
+  X←B[J;K←M]
+  →COL
+GENERAL:→(∧/0=D←|X|,(I,I)↓B)/END
+  V←I+((⍴B)-I)⊤D⍳⌊/(D≠0)/D
+  B[L;]←B[L;]-(Q←¯1+⌊B[L←V[0];K]÷X)×B[J;]
+  r[L;]←r[L;]-Q×r[J;]
+  B[;M]←B[;M]-(Q←⌊(B[L;M]-X|B[L;M←V[1]])÷X)×B[;K]
+  s[;M]←s[;M]-Q×s[;K]
+  X←B[J←L;K←M]
+  →COL
+END:B[I,J;]←B[J,I;]
+  r[I,J;]←r[J,I;]
+  B[;I,K]←B[;K,I]
+  s[;I,K]←s[;K,I]
+  B[I;]←B[I;]××X
+  r[I;]←r[I;]××X
+  B[Y;]←B[Y;]-(Q←⌊B[Y←(I+1)↓⍳1↑⍴B;I]÷B[I;I])∘.×B[I;]
+  r[Y;]←r[Y;]-Q∘.×r[I;]
+  B[;Z]←B[;Z]-B[;I]∘.×Q←⌊B[I;Z←(I+1)↓⍳1↓⍴B]÷B[I;I]
+  s[;Z]←s[;Z]-s[;I]∘.×Q
+  →LOOPI
+∇
+
+∇B←ZROWREDUCE A;IO;I;J;K;L;D;E;F;X;Y;N;M
+  ⍝ ROW REDUCES THE INTEGER MATRIX  A.  PRODUCES  r, AN
+  ⍝ INVERTIBLE INTEGER MATRIX SUCH THAT  B  IS  r+.×A.
+  ⍝ ALSO PRODUCES A VECTOR v LISTING THE COLUMNS CONTAINING
+  ⍝ THE CORNER ENTRIES OF B.
+  DERR∧/(2=⍴⍴A),,A=⌊A
+  IO←⎕IO
+  ⎕IO←1
+  L←¯1↑⍴B←A
+  r←(K,K)⍴1,(K←1↑⍴B)⍴0
+  v←⍳I←J←0
+LOOP:→((J≥K)∨L<I←I+1)/END
+BACK:→(0=⍴D←(E≠0)/E←|J↓B[;I])/LOOP
+  X←J+E⍳N←⌊/D
+  F←((X≠Y←J↓⍳K)×J↓B[;I])ZQUOT B[X;I]
+  B[Y;]←((J,0)↓B)-F∘.×B[X;]
+  r[Y;]←((J,0)↓r)-F∘.×r[X;]
+  →(1<+/0≠J↓B[;I])/BACK
+  v←v,I
+  B[J,X;]←B[X,J←J+1;]
+  r[J,X;]←r[X,J;]
+  B[J;]←B[J;]×M←×B[J;I]
+  r[J;]←r[J;]×M
+  F←B[Y←⍳J-1;I]ZQUOT B[J;I]
+  B[Y;]←B[Y;]-F∘.×B[J;]
+  r[Y;]←r[Y;]-F∘.×r[J;]
+  →LOOP
+END:v←v-1-⎕IO←IO
 ∇
