@@ -1,0 +1,14 @@
+ X←DAQ A;NA;RA;M;K;R
+⍝ PRODUCES THE CHARACTER ARRAY FOR DISPLAYING AN
+⍝ ARRAY OF RATIONAL NUMBERS.
+ X←''
+ →(0=NA←×/⍴A)/0
+ RA←⍴A←QNRMLZ A
+ M←1⌈¯1↓¯2↑RA
+ K←¯1↑⍴X←⍕(NA,1)⍴A
+ R←(¯1++/X=' ')×NA⍴0 1
+ X←R⌽X
+ X←((×/¯1↓RA),2×K)⍴X
+ X[;K+⎕IO]←'/'
+ X←X,' '
+ X←((¯2↓RA),M×¯1↑⍴X)⍴X

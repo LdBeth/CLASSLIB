@@ -1,0 +1,14 @@
+ Z←DECCARRY X;SGN
+⍝ EXERCISE 2.5.2
+ Z←,X
+ SGN←1
+LOOP:Z←(+/∧\Z=0)↓Z
+ →(0≠⍴Z)/NONEMPTY
+ →Z←,0
+NONEMPTY:→(0<1↑Z)/POS
+ SGN←-SGN
+ Z←-Z
+POS:→(∧/(0≤Z),Z<10)/DONE
+ Z←(0,10|Z)+(Z ZQUOT 10),0
+ →LOOP
+DONE:Z←SGN×Z

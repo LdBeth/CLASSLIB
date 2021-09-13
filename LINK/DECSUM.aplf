@@ -1,0 +1,4 @@
+ Z←X DECSUM Y;M
+⍝ EXERCISE 2.5.2
+ M←(⍴X←,X)⌈⍴Y←,Y
+ Z←DECCARRY((-M)↑X)+(-M)↑Y

@@ -1,0 +1,28 @@
+ B←ZROWREDUCE A;IO;I;J;K;L;D;E;F;X;Y;N;M
+⍝ ROW REDUCES THE INTEGER MATRIX  A.  PRODUCES  r, AN
+⍝ INVERTIBLE INTEGER MATRIX SUCH THAT  B  IS  r+.×A.
+⍝ ALSO PRODUCES A VECTOR v LISTING THE COLUMNS CONTAINING
+⍝ THE CORNER ENTRIES OF B.
+ DERR∧/(2=⍴⍴A),,A=⌊A
+ IO←⎕IO
+ ⎕IO←1
+ L←¯1↑⍴B←A
+ r←(K,K)⍴1,(K←1↑⍴B)⍴0
+ v←⍳I←J←0
+LOOP:→((J≥K)∨L<I←I+1)/END
+BACK:→(0=⍴D←(E≠0)/E←|J↓B[;I])/LOOP
+ X←J+E⍳N←⌊/D
+ F←((X≠Y←J↓⍳K)×J↓B[;I])ZQUOT B[X;I]
+ B[Y;]←((J,0)↓B)-F∘.×B[X;]
+ r[Y;]←((J,0)↓r)-F∘.×r[X;]
+ →(1<+/0≠J↓B[;I])/BACK
+ v←v,I
+ B[J,X;]←B[X,J←J+1;]
+ r[J,X;]←r[X,J;]
+ B[J;]←B[J;]×M←×B[J;I]
+ r[J;]←r[J;]×M
+ F←B[Y←⍳J-1;I]ZQUOT B[J;I]
+ B[Y;]←B[Y;]-F∘.×B[J;]
+ r[Y;]←r[Y;]-F∘.×r[J;]
+ →LOOP
+END:v←v-1-⎕IO←IO

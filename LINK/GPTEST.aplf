@@ -1,0 +1,7 @@
+ T←GPTEST A;M;N;Z
+⍝ CHECKS THAT  A  IS AN ARRAY OF PERMUTATIONS.
+ →(~T←∧/(1≤⍴⍴A),,A=⌊A)/0
+ →(~T←(∧/,A≥⎕IO)∧∧/A<⎕IO+N←¯1↑⍴A)/0
+ Z←(×/⍴A)⍴0
+ Z[(,A)+,⍉(N,M)⍴N×(⍳M←×/¯1↓⍴A)-⎕IO]←1
+ T←∧/Z

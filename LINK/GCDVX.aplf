@@ -1,0 +1,19 @@
+ D←GCDVX A;I;M;Q;X;S
+⍝ EXERCISE 2.2.23
+ →(0<⍴A←,A)/NONEMPTY
+ r←⍳0
+ →D←0
+NONEMPTY:r←(2⍴⍴A)⍴1,(⍴A)⍴0
+ S←(A<0)/⍳⍴A
+ r[S;]←-r[S;]
+ A[S]←-A[S]
+LOOP:A←(X←A≠0)/A
+ r←X⌿r
+ →(1≥⍴A)/DONE
+ I←A⍳M←⌊/A
+ Q←A ZQUOT M
+ A←M,M|A
+ r←r[I;],[⎕IO]r-Q∘.×r[I;]
+ →LOOP
+DONE:D←(⍳0)⍴A
+ r←,r

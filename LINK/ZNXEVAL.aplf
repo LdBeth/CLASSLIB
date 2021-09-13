@@ -1,0 +1,12 @@
+ Y←A ZNXEVAL B;I;NOTEST;⎕IO;RHO
+⍝ EVALUATES THE POLYNOMIALS IN  A  AT  B  MODULO  n.
+ DERR∧/(,A=⌊A),(,B=⌊B←((⍴B),1)⍴B),n<10000000
+ EXPANDV
+ A←((×/RHO←¯1↓⍴A),¯1↑⍴A)⍴n|A
+ Y←(⍴B←,n|B)⍴0
+ ⎕IO←NOTEST←1
+ I←1+(⍴A)[2]
+LOOP:→(0≥I←I-1)/END
+ Y←n|A[;I]+B×Y
+ →LOOP
+END:Y←RHO⍴Y

@@ -1,0 +1,14 @@
+ C←A RLSYS B;T;X;r;v
+⍝ SOLVES LINEAR SYSTEMS OVER  R.  PRODUCES AN ARRAY  C
+⍝ SUCH THAT  A+.×C  IS  B  AND A MATRIX  w  WHOSE
+⍝ ROWS SPAN THE SOLUTION SPACE OF THE CORRESPONDING
+⍝ HOMOGENEOUS SYSTEM.
+ DERR∧/(2=⍴⍴A),(1≤⍴⍴B),(1↑⍴A)=1↑⍴B
+ A←RROWREDUCE A
+ B←B×(|B)≥EPSILON×⌈/(,|A),,|B←r+.×B
+ DERR∧/,0=((⍴v),(¯1+⍴⍴B)⍴0)↓B
+ X←(~T←(¯1↑⍴A)SCHV v)/⍳¯1↑⍴A
+ w←((⍴X),⍴T)⍴0
+ w[;X]←X∘.=X
+ w[;v]←⍉-A[⍳⍴v;X]
+ C←T⍀((⍴v),1↓⍴B)↑B

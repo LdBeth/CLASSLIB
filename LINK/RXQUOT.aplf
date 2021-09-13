@@ -1,0 +1,23 @@
+ C←A RXQUOT B;⎕IO;DB;N;K;L;R;I;F;D;E;RHO
+⍝ COMPUTES QUOTIENTS IN THE EUCLIDEAN DOMAIN
+⍝ OF REAL POLYNOMIALS.  THE REMAINDER IS SAVED
+⍝ IN THE GLOBAL VARIABLE  a.
+ ⎕IO←0
+ EXPANDV
+ DERR∧/,0≤DB←RXDEGREE B
+ N←×/RHO←⍴DB
+ L←K⌈(+/¯1↑⍴A)+⌈/R←(¯1+K←+/¯1↑⍴B)-,DB
+ B←(-R)⌽(N,K)⍴B
+ A←(-R)⌽(N,L)↑(N,¯1↑⍴A)⍴A
+ C←(N,I←1++/L-K)⍴2-2
+ E←÷B[;K-1]
+LOOP:→(0>I←I-1)/END
+ C[;I]←F←A[;I+K-1]×E
+ A[;I+⍳K]←A[;I+⍳K]-B×⍉(⌽⍴B)⍴F
+ →LOOP
+END:C←C×(|C)≥EPSILON×⌈/,|C
+ D←1⌈+/∨\⌽∨⌿C≠0
+ C←(RHO,D)⍴(N,D)↑C
+ A←A×(|A)≥EPSILON×⌈/(,|A),,|B
+ D←1⌈+/∨\⌽∨⌿0≠A←R⌽A
+ a←(RHO,D)⍴(N,D)↑A

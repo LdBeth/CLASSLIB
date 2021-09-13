@@ -1,0 +1,13 @@
+ P←ZPRIMES N;⎕IO;Q;R
+⍝ LISTS THE PRIMES UP TO N.
+ ⎕IO←0
+ DERR 1=⍴N←,N
+ P←(N≥P)/P←2 3 5 7 11 13 17 19
+ →(N≤22)/0
+ Q←,(30×⍳⌈N÷30)∘.+7 11 13 17 19 23 29 31
+ Q←(∧⌿0≠7 11 13 17 19∘.|Q)/Q
+LOOP:→((0=⍴Q)∨N<(1↑Q)*2)/END
+ P←P,R←(5⌊⍴Q)↑Q
+ Q←(∧⌿0≠R∘.|Q)/Q
+ →LOOP
+END:P←(N≥P)/P←P,Q

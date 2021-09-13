@@ -1,0 +1,6 @@
+ X←MPZFORM A
+⍝ CONVERTS A VECTOR OF DIGITS TO THE BASE 1E6 TO
+⍝ A VECTOR OF CHARACTERS.
+ X←,((⍴A),¯6)↑⍕((⍴A),1)⍴⌊|A←,A
+ X[(X=' ')/⍳⍴X]←'0'
+ X←((¯1=×1↑A)⍴'¯'),((('0'≠¯1↓X)⍳1)-⎕IO)↓X

@@ -1,0 +1,11 @@
+ B←MPZNEG A;⎕IO;I;C
+⍝ COMPUTES THE NEGATIVE OF AN INTEGER GIVEN
+⍝ BY A CHARACTER VECTOR OF DIGITS TO THE BASE 10.
+ ⎕IO←0
+ DERR(1≥⍴⍴A)∧' '=1↑0↑,A
+ I←(C←1↑B←,A)∊'+¯'
+ B←I↓B
+ DERR∧/B∊'0123456789'
+ B←(+/∧\'0'=¯1↓B)↓B
+ →((C='¯')∨'0'=1↑B)/0
+ B←'¯',B

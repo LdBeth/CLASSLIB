@@ -1,0 +1,25 @@
+ B←RROWREDUCE A;IO;I;J;K;L;M;F;X
+⍝ ROW REDUCES THE REAL MATRIX  B.  PRODUCES  r, AN
+⍝ INVERTIBLE REAL MATRIX SUCH THAT  B  IS  r+.×A.
+⍝ THE VECTOR  v  LISTS THE COLUMNS CONTAINING THE
+⍝ CORNER ENTRIES OF  B.
+ DERR 2=⍴⍴B←A×(|A)≥EPSILON×⌈/,|A
+ IO←⎕IO
+ ⎕IO←1
+ L←¯1↑⍴B
+ r←(K,K)⍴1,(K←1↑⍴B)⍴0
+ v←⍳I←J←0
+LOOP:→((J≥K)∨L<I←I+1)/END
+ →(0=M←⌈/C←|J↓B[;I])/LOOP
+ v←v,I
+ X←J+C⍳M
+ B[J,X;]←B[X,J←J+1;]
+ r[J,X;]←r[X,J;]
+ B[J;]←B[J;]×M←÷B[J;I]
+ r[J;]←r[J;]×M
+ F←(J≠⍳K)×B[;I]
+ B←B×(|B)≥EPSILON×⌈/,|B←B-F∘.×B[J;]
+ r←r-F∘.×r[J;]
+ →LOOP
+END:v←v-1-⎕IO←IO
+ r←r×(|r)≥EPSILON×⌈/,|r

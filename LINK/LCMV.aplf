@@ -1,0 +1,16 @@
+ M←LCMV A;N;A1;A2;D
+⍝ EXERCISE 2.2.24
+ →(0<⍴A←,A)/NONEMPTY
+ M←1
+ →0
+NONEMPTY:→(∧/A≠0)/NONZERO
+ →M←0
+NONZERO:→(1<⍴A)/LONG
+ M←(⍳0)⍴|A
+ →0
+LONG:→(0=2|⍴A)/EVEN
+ A←A,1
+EVEN:N←(⍴A)÷2
+ D←(A1←N↑A)ZGCD A2←N↓A
+ A←⌊(A1×A2)÷D
+ →NONZERO

@@ -1,0 +1,5 @@
+ M←PHI N;P;Q;E
+⍝ EXERCISE 3.6.17
+ P←SSORT Q←ZFACTOR N
+ E←+/P∘.=Q
+ M←×/(P*E-1),P-1

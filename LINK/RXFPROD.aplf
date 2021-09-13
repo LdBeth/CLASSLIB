@@ -1,0 +1,9 @@
+ C←A RXFPROD B;D;E
+⍝ COMPUTES THE PRODUCT OF TWO ARRAYS OVER THE
+⍝ CURRENT QUOTIENT ALGEBRA OF R[X].
+ C←A RXPROD B
+ DERR(D←¯1↑⍴C)≤+/⍴RXRT
+ →(D≤E←¯1↑⍴RXRT)/0
+ C←(((¯1↓⍴C),E)↑C)+(((-⍴⍴C)↑E)↓C)+.×((D-E),E)↑RXRT
+ D←1⌈+/∨\⌽∨⌿((×/¯1↓⍴C),E)⍴C≠0
+ C←((¯1↓⍴C),D)↑C

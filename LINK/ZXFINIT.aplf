@@ -1,0 +1,11 @@
+ ZXFINIT F;⎕IO;D;I
+⍝ INITIALIZES THE CURRENT QUOTIENT ALGEBRA OF Z[X].
+ ⎕IO←0
+ DERR∧/(1=⍴⍴F),,F=⌊F
+ DERR 1≤D←¯1++/∨\⌽0≠F
+ DERR 1=|F[D]
+ ZXRT←((D-1),D)⍴-F←F[D]×D↑F
+ I←0
+LOOP:→((D-1)≤I←I+1)/0
+ ZXRT[I;]←(0,¯1↓ZXRT[I-1;])-F×ZXRT[I-1;D-1]
+ →LOOP

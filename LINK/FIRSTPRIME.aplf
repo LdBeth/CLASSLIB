@@ -1,0 +1,9 @@
+ P←FIRSTPRIME N
+⍝ EXERCISE 2.4.5
+ →(N>2)/ODD
+ P←2
+ →0
+ODD:P←1+2×⌊N÷2
+LOOP:→(1=⍴ZFACTOR P)/0
+ P←P+2
+ →LOOP

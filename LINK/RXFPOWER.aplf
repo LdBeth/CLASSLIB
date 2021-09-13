@@ -1,0 +1,17 @@
+ C←A RXFPOWER B;R;RHO;I;J;M;N;D
+⍝ COMPUTES THE B-TH POWER OF  A  IN THE CURRENT
+⍝ QUOTIENT OF  R[X].
+ B←((⍴B),1)⍴B
+ EXPANDV
+ DERR(M←¯1↑⍴A)≤N←¯1↑⍴RXRT
+ R←×/RHO←¯1↓⍴A
+ A←(R,N)↑(R,M←¯1↑⍴A)⍴A
+ C←(R,N)⍴N↑1
+ I←(B>0)/⍳⍴B←,B
+LOOP:C[J;]←((⍴J),N)↑C[J;]RXFPROD A[J←(2|B[I])/I;]
+ →(0=⍴I←(B[I]≥2)/I)/END
+ A[I;]←((⍴I),N)↑A[I;]RXFPROD A[I;]
+ B[I]←⌊B[I]÷2
+ →LOOP
+END:D←1⌈⌈/,+/∨\⌽0≠C
+ C←(RHO,D)⍴(R,D)↑C

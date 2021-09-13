@@ -1,0 +1,8 @@
+ Y←X POWERR N
+⍝ EXERCISE 3.1.27
+ →(N>0)/POS
+ Y←1
+ →0
+POS:Y←Y×Y←X POWERR⌊N÷2
+ →(0=2|N)/0
+ Y←X×Y

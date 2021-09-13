@@ -1,0 +1,9 @@
+ P←SIEVE N;⎕IO;Q;N;M
+ ⎕IO←1
+ P←⍳0
+ Q←1↓⍳N
+LOOP:→((0=⍴Q)∨N<M×M←1↑Q)/DONE
+ P←P,M
+ Q←(0≠M|Q)/Q
+ →LOOP
+DONE:P←P,Q

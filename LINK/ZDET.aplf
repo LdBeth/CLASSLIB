@@ -1,0 +1,21 @@
+ D←ZDET A;⎕IO;V;J;W;Q
+⍝ COMPUTES THE DETERMINANT OF AN INTEGER MATRIX
+⍝ USING INTEGER ROW OPERATIONS.
+ DERR∧/(,A=⌊A),(2=⍴⍴A),=/⍴A
+ D←⎕IO←1
+ →(0=1↑⍴A)/0
+LOOP:→(1=1↑⍴A)/END
+BACK:→(∧/0=V←|A[;1])/ZERO
+ J←V⍳⌊/(V≠0)/V
+ →(J=1)/OK
+ A[1,J;]←A[J,1;]
+ D←-D
+OK:→(∧/0=W←1↓A[;1])/ENDLP
+ Q←0,(⌊W÷|A[1;1])××A[1;1]
+ A←A-Q∘.×A[1;]
+ →BACK
+ENDLP:D←D×A[1;1]
+ A←1 1↓A
+ →LOOP
+ZERO:→D←0
+END:D←D×A[1;1]

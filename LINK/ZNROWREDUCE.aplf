@@ -1,0 +1,29 @@
+ B←ZNROWREDUCE A;IO;I;J;K;L;M;X;U;GCD;s;Y;D;NOTEST;R
+⍝ ROW REDUCES  A  MODULO  n, WHICH MUST BE LESS
+⍝ THAN 1E7.  PRODUCES  r, AN INVERTIBLE MATRIX MODULO  n
+⍝ SUCH THAT  B  IS  r ZNMATPROD A, AND A VECTOR  v  LISTING
+⍝ THE COLUMNS CONTAINING THE 'CORNER ENTRIES' OF  B.
+ DERR∧/(n<10000000),(,A=⌊A),2=⍴⍴A
+ IO←⎕IO
+ ⎕IO←NOTEST←1
+ L←¯1↑⍴B←n|A
+ R←(K,K)⍴1,(K←1↑⍴B)⍴0
+ v←⍳I←J←0
+LOOP1:→((J≥K)∨L<I←I+1)/END
+LOOP2:→(∧/0=U←J↓B[;I])/LOOP1
+ M←⌊/(U≠0)/U
+ X←J+U⍳M
+ D←M ZGCD n
+ B[X;]←n|B[X;]×r
+ R[X;]←n|R[X;]×r
+ Y←(X≠⍳K)×B[;I]ZQUOT(1↑⍴B)⍴B[X;I]
+ B←n|B-Y∘.×B[X;]
+ R←n|R-Y∘.×R[X;]
+ →(1=+/U≠0)/END1
+ →LOOP2
+END1:v←v,I
+ B[J,X;]←B[X,J←J+1;]
+ R[J,X;]←R[X,J;]
+ →LOOP1
+END:v←v-1-⎕IO←IO
+ r←R

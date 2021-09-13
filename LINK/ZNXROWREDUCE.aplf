@@ -1,0 +1,28 @@
+ B←ZNXROWREDUCE A;IO;I;J;K;L;C;D;M;a
+⍝ ROW REDUCES A MATRIX OF POLYNOMIALS IN  ZN[X].
+⍝ n MUST BE A PRIME.  PRODUCES AN INVERTIBLE MATRIX  r
+⍝ OF POLYNOMIALS SUCH THAT  B  IS  r ZNXMATPROD A.
+⍝ THE VECTOR  v  LISTS THE CORNER ENTRIES OF  B.
+ DERR∧/(1=⍴ZFACTOR n),(3=⍴⍴A),,A=⌊A
+ B←n|A
+ IO←⎕IO
+ ⎕IO←1
+ v←⍳0
+ r←(K,K,1)⍴1,(K←1↑⍴B)⍴I←J←0
+LOOP:→((J≥1↑⍴B)∨(⍴B)[2]<I←I+1)/END
+BACK:→(0=⍴D←(C≥0)/C←ZNXDEGREE(J,0)↓B[;I;])/LOOP
+ K←J+C⍳⌊/D
+ C←B[;I;]ZNXQUOT B[K;I;]
+ C[K;]←0
+ D←2 1 3⍉((⍴B)[2],⍴C)⍴C
+ B←B ZNXDIFF D ZNXPROD(⍴B)⍴B[K;;]
+ D←2 1 3⍉((⍴r)[2],⍴C)⍴C
+ r←r ZNXDIFF D ZNXPROD(⍴r)⍴r[K;;]
+ →(1<+/∨/0≠(J,0)↓B[;I;])/BACK
+ v←v,I
+ B[J,K;;]←B[K,J←J+1;;]
+ r[J,K;;]←r[K,J;;]
+ B[J;;]←n|B[J;;]×M←ZNINV ZNXLEAD B[J;I;]
+ r[J;;]←n|r[J;;]×M
+ →LOOP
+END:v←v-1-⎕IO←IO

@@ -1,0 +1,16 @@
+ D←RDET A;⎕IO;K;M;I;J;X;Y
+⍝ COMPUTES AN APPROXIMATION TO THE DETERMINANT OF
+⍝ THE REAL MATRIX  A.
+ DERR(2=⍴⍴A)∧=/⍴A
+ D←⎕IO←1
+LOOP:→(0=K←1↑⍴A)/0
+ A←A×(|A)≥EPSILON×M←⌈/,|A
+ →(M=0)/ZERO
+ I←(⌈/|A)⍳M
+ J←(|A[I;])⍳M
+ D←D×A[I;J]×¯1*I+J
+ X←A[I;]÷A[I;J]
+ A←(I≠⍳K)⌿A
+ A←(J≠⍳K)/A-A[;J]∘.×X
+ →LOOP
+ZERO:D←0

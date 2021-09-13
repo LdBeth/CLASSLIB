@@ -1,0 +1,7 @@
+ B←TRAV A;R
+⍝ TRANSPOSES AN ARRAY OF VECTORS.
+ →(1≥⍴⍴A)/SMALL
+ R←⍳⍴⍴A
+ B←((⌽¯1↓R),¯1↑R)⍉A
+ →0
+SMALL:B←A

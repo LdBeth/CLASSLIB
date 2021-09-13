@@ -1,0 +1,6 @@
+ Z←X DECPROD Y;⎕IO;U;V
+⍝ EXERCISE 2.5.2
+ ⎕IO←0
+ U←(Y←,Y)∘.×X←,X
+ V←(-⍳⍴Y)⌽((⍴U)+0,¯1+⍴Y)↑U
+ Z←DECCARRY+⌿V

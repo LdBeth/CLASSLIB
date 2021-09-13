@@ -1,0 +1,24 @@
+ C←A ZNXQUOT B;⎕IO;DB;N;K;L;R;I;F;D;E;RHO
+⍝ COMPUTES THE QUOTIENT OF  A  BY  B IN THE RING
+⍝ OF INTEGER POLYNOMIALS MODULO  n, WHICH MUST BE
+⍝ LESS THAN 1E7.  THE LEADING COEFFICIENTS IN  B
+⍝ MUST BE UNITS.  THE GLOBAL VARIABLE  a  CONTAINS
+⍝ THE REMAINDERS.
+ ⎕IO←0
+ DERR∧/(,A=⌊A←n|A),(,B=⌊B←n|B),n<10000000
+ EXPANDV
+ DERR∧/,0≤DB←¯1++/∨\⌽0≠B
+ N←×/RHO←⍴DB
+ L←K⌈(+/¯1↑⍴A)+⌈/R←(¯1+K←+/¯1↑⍴B)-,DB
+ B←(-R)⌽(N,K)⍴B
+ A←(-R)⌽(N,L)↑(N,¯1↑⍴A)⍴A
+ C←(N,I←1++/L-K)⍴2-2
+ E←ZNINV B[;K-1]
+LOOP:→(0>I←I-1)/END
+ C[;I]←F←n|A[;I+K-1]×E
+ A[;I+⍳K]←n|A[;I+⍳K]-B×⍉(⌽⍴B)⍴F
+ →LOOP
+END:D←1⌈⌈/,+/∨\⌽0≠C
+ C←(RHO,D)⍴(N,D)↑C
+ D←1⌈⌈/,+/∨\⌽0≠A←R⌽A
+ a←(RHO,D)⍴(N,D)↑A

@@ -1,0 +1,30 @@
+ C←A RXGCD B;⎕IO;M;U;V;R;RHO;I;Q;T;D;LA;LB;NOTEST;a
+⍝ COMPUTES MONIC GCD'S OF REAL POLYNOMIALS.  THE
+⍝ RESULT  C  IS  (r RXPROD A) RXSUM s RXPROD B.
+ ⎕IO←1
+ A←A×(|A)≥EPSILON×⌈/,|A
+ B←B×(|B)≥EPSILON×⌈/,|B
+ EXPANDV
+ M←1⌈+/∨\⌽∨⌿0≠((×/¯1↓⍴A),¯1↑⍴A)⍴A
+ M←M⌈+/∨\⌽∨⌿0≠((×/¯1↓⍴B),¯1↑⍴B)⍴B
+ R←×/RHO←¯1↓⍴A
+ NOTEST←1
+ A←(R,M)⍴(RHO,M)↑A RXPROD LA←(RHO,1)⍴÷RXLEAD A
+ B←(R,M)⍴(RHO,M)↑B RXPROD LB←(RHO,1)⍴÷RXLEAD B
+ U←((⍴A)↑(R,1)⍴LA),[1]((⍴A)⍴0),[0.5]A
+ V←((⍴B)⍴0),[1]((⍴B)↑(R,1)⍴LB),[0.5]B
+ I←⍳R
+LOOP:→(0=⍴I←(∨/V[3;I;]≠0)/I)/END
+ Q←((⍴I),M)↑U[3;I;]RXQUOT V[3;I;]
+ T←(3,(⍴I),M)↑U[;I;]RXDIFF V[;I;]RXPROD(3,⍴Q)⍴Q
+ T[3;;]←T[3;;]×(|T[3;;])≥⍉(⌽1↓⍴T)⍴EPSILON×⌈/|V[3;I;]
+ T←(⍴T)↑T RXPROD(3,(⍴I),1)⍴÷RXLEAD T[3;;]
+ U[;I;]←V[;I;]
+ V[;I;]←T
+ →LOOP
+END:D←1⌈+/∨\⌽∨⌿0≠U[3;;]
+ C←(RHO,D)⍴(R,D)↑U[3;;]
+ D←1⌈+/∨\⌽∨⌿0≠U[1;;]
+ r←(RHO,D)⍴(R,D)↑U[1;;]
+ D←1⌈+/∨\⌽∨⌿0≠U[2;;]
+ s←(RHO,D)⍴(R,D)↑U[2;;]

@@ -1,0 +1,9 @@
+ T←GPSYMG N;V
+⍝ LISTS THE ELEMENTS OF THE SYMMETRIC GROUP ON  ⍳N.
+ DERR∧/(0≤N←''⍴N),(N=⌊N),1=⍴N←,N
+ →(N>0)/GENERAL
+ T←1 0⍴0
+ →0
+GENERAL:T←((!N),N-1)⍴GPSYMG N-1
+ V←,⍉((!N-1),N)⍴(⍳N)-⎕IO
+ T←V⌽((-V)⌽T),N+⎕IO-1

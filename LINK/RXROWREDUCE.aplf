@@ -1,0 +1,29 @@
+ B←RXROWREDUCE A;IO;I;J;K;L;C;D;M;a
+⍝ ROW REDUCES A MATRIX OF POLYNOMIALS IN  R[X].
+⍝ PRODUCES AN INVERTIBLE MATRIX  r
+⍝ OF POLYNOMIALS SUCH THAT  B  IS  r RXMATPROD A.
+⍝ THE VECTOR  v  LISTS THE COLUMNS OF THE CORNER
+⍝ ENTRIES OF  B.
+ DERR 3=⍴⍴A
+ B←A
+ IO←⎕IO
+ ⎕IO←1
+ v←⍳0
+ r←(K,K,1)⍴1,(K←1↑⍴B)⍴I←J←0
+LOOP:→((J≥1↑⍴B)∨(⍴B)[2]<I←I+1)/END
+BACK:→(0=⍴D←(C≥0)/C←RXDEGREE(J,0)↓B[;I;])/LOOP
+ K←J+C⍳⌊/D
+ C←B[;I;]RXQUOT B[K;I;]
+ C[K;]←0
+ D←2 1 3⍉((⍴B)[2],⍴C)⍴C
+ B←B RXDIFF D RXPROD(⍴B)⍴B[K;;]
+ D←2 1 3⍉((⍴r)[2],⍴C)⍴C
+ r←r RXDIFF D RXPROD(⍴r)⍴r[K;;]
+ →(1<+/∨/0≠(J,0)↓B[;I;])/BACK
+ v←v,I
+ B[J,K;;]←B[K,J←J+1;;]
+ r[J,K;;]←r[K,J;;]
+ B[J;;]←B[J;;]×M←÷RXLEAD B[J;I;]
+ r[J;;]←r[J;;]×M
+ →LOOP
+END:v←v-1-⎕IO←IO

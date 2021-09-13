@@ -1,0 +1,79 @@
+ B←ZNXREDUCE A;⎕IO;I;J;K;L;M;N;Q;E;D;Y;Z;U;V;X;a
+⍝ REDUCES A MATRIX OF POLYNOMIALS IN  ZN[X]  USING
+⍝ ROW AND COLUMN OPERATIONS.  PRODUCES  MATRICES  r
+⍝ AND  s  SUCH THAT  B  IS THE MATRIX PRODUCT OF
+⍝ r,  A  AND  s.   n  MUST BE A PRIME.
+ DERR∧/(1=⍴ZFACTOR n),(3=⍴⍴A),,A=⌊A
+ B←n|A
+ ⎕IO←0
+ r←(K,K,1)⍴1,(K←1↑⍴B)⍴0
+ s←(L,L,1)⍴1,(L←(⍴B)[1])⍴0
+ I←¯1
+LOOPI:→(∧/¯1=D←,ZNXDEGREE((I,I←I+1),0)↓B)/CLEANUP
+ V←I+((2↑⍴B)-I)⊤D⍳⌊/(D≥0)/D
+ X←B[J←V[0];K←V[1];]
+COL:→(∧/¯1=D←ZNXDEGREE X ZNXREM B[;K;])/ROW
+ L←D⍳⌊/(D≥0)/D
+ Q←B[L;K;]ZNXQUOT X
+ E←Q ZNXPROD B[J;;]
+ B←((¯1↓⍴B),(¯1↑⍴B)⌈¯1↑⍴E)↑B
+ B[L;;]←n|B[L;;]-(1↓⍴B)↑E
+ E←Q ZNXPROD r[J;;]
+ r←((¯1↓⍴r),(¯1↑⍴r)⌈¯1↑⍴E)↑r
+ r[L;;]←n|r[L;;]-(1↓⍴r)↑E
+ X←B[J←L;K;]
+ →COL
+ROW:→(∧/¯1=D←ZNXDEGREE X ZNXREM B[J;;])/GENERAL
+ M←D⍳⌊/(D≥0)/D
+ Q←B[J;M;]ZNXQUOT X
+ E←Q ZNXPROD B[;M;]
+ B←((¯1↓⍴B),(¯1↑⍴B)⌈¯1↑⍴E)↑B
+ B[;M;]←n|B[;M;]-(⍴B)[0 2]↑E
+ E←Q ZNXPROD s[;M;]
+ S←((¯1↓⍴s),(¯1↑⍴s)⌈¯1↑⍴E)↑s
+ s[;M;]←n|s[;M;]-(⍴s)[0 2]↑E
+ X←B[J;K←M;]
+ →COL
+GENERAL:→(∧/¯1=D←,ZNXDEGREE X ZNXREM(I,I,0)↓B)/END
+ V←I+((2↑⍴B)-I)⊤D⍳⌊/(D≥0)/D
+ Q←B[L←V[0];K;]ZNXQUOT X
+ E←Q ZNXPROD B[J;;]
+ B←((¯1↓⍴B),(¯1↑⍴B)⌈¯1↑⍴E)↑B
+ B[L;;]←n|B[L;;]-(1↓⍴B)↑E
+ E←Q ZNXPROD r[J;;]
+ r←((¯1↓⍴r),(¯1↑⍴r)⌈¯1↑⍴E)↑r
+ r[L;;]←n|r[L;;]-(1↓⍴r)↑E
+ Q←B[L;M←V[1];]ZNXQUOT X
+ E←Q ZNXPROD B[;K;]
+ B←((¯1↓⍴B),(¯1↑⍴B)⌈¯1↑⍴E)↑B
+ B[;M;]←n|B[;M;]-(⍴B)[0 2]↑E
+ E←Q ZNXPROD s[;K;]
+ s←((¯1↓⍴s),(¯1↑⍴s)⌈¯1↑⍴E)↑s
+ s[;M;]←n|s[;M;]-(⍴s)[0 2]↑E
+ X←B[J←L;K←M;]
+ →COL
+END:B[I,J;;]←B[J,I;;]
+ r[I,J;;]←r[J,I;;]
+ B[;I,K;]←B[;K,I;]
+ s[;I,K;]←s[;K,I;]
+ B[I;;]←n|B[I;;]×U←ZNINV ZNXLEAD X
+ r[I;;]←n|r[I;;]×U
+ Q←B[Y←(I+1)↓⍳1↑⍴B;I;]ZNXQUOT B[I;I;]
+ E←(1 0 2⍉((⍴B)[1],⍴Q)⍴Q)ZNXPROD((1↑⍴Q),1↓⍴B)⍴B[I;;]
+ B←((¯1↓⍴B),(¯1↑⍴B)⌈¯1↑⍴E)↑B
+ B[Y;;]←n|B[Y;;]-((⍴Y),1↓⍴B)↑E
+ E←(1 0 2⍉((⍴r)[1],⍴Q)⍴Q)ZNXPROD((1↑⍴Q),1↓⍴r)⍴r[I;;]
+ r←((¯1↓⍴r),(¯1↑⍴r)⌈¯1↑⍴E)↑r
+ r[Y;;]←n|r[Y;;]-((⍴Y),1↓⍴r)↑E
+ Q←B[I;Z←(I+1)↓⍳(⍴B)[1];]ZNXQUOT B[I;I;]
+ B[I;Z;]←0
+ E←(1 0 2⍉((1↑⍴Q),(⍴s)[0 2])⍴s[;I;])ZNXPROD((1↑⍴s),⍴Q)⍴Q
+ s←((¯1↓⍴s),(¯1↑⍴s)⌈¯1↑⍴E)↑s
+ s[;Z;]←n|s[;Z;]-((1↑⍴s),(⍴Z),¯1↑⍴s)↑E
+ →LOOPI
+CLEANUP:D←1⌈+/∨\⌽∨⌿∨⌿0≠B
+ B←((¯1↓⍴B),D)↑B
+ D←1⌈+/∨\⌽∨⌿∨⌿0≠r
+ r←((¯1↓⍴r),D)↑r
+ D←1⌈+/∨\⌽∨⌿∨⌿0≠s
+ s←((¯1↓⍴s),D)↑s

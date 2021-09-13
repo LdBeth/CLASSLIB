@@ -1,0 +1,3 @@
+ T←A SETEQ B
+⍝ EXERCISE 1.1.14
+ T←∧/(A∊B),B∊A

@@ -1,0 +1,7 @@
+ D←GCDV A;M
+⍝ EXERCISE 2.2.22
+ →(0<⍴A←(A≠0)/A←,A)/LOOP
+ →D←0
+LOOP:A←(A≠0)/A←M,(M←⌊/A)|A←|A
+ →(1<⍴A)/LOOP
+ D←(⍳0)⍴A

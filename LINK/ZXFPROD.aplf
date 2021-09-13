@@ -1,0 +1,9 @@
+ C←A ZXFPROD B;D;E
+⍝ COMPUTE THE PRODUCT OF TWO ARRAYS OVER THE
+⍝ CURRENT QUOTIENT ALGEBRA OF Z[X].
+ C←A ZXPROD B
+ DERR(D←¯1↑⍴C)≤+/⍴ZXRT
+ →(D≤E←¯1↑⍴ZXRT)/0
+ C←(((¯1↓⍴C),E)↑C)+(((-⍴⍴C)↑E)↓C)+.×((D-E),E)↑ZXRT
+ D←1⌈+/∨\⌽∨⌿((×/¯1↓⍴C),E)⍴C≠0
+ C←((¯1↓⍴C),D)↑C

@@ -1,0 +1,43 @@
+ B←ZREDUCE A;⎕IO;I;J;K;L;M;Q;D;Y;Z;X;V
+⍝ REDUCES AN INTEGER MATRIX.  PRODUCES INVERTIBLE
+⍝ INTEGER MATRICES  r  AND  s  SUCH THAT  B  IS
+⍝ THE MATRIX PRODUCT OF  r,  A  AND  s.
+ ⎕IO←0
+ DERR∧/(2=⍴⍴A),,B=⌊B←A
+ r←(K,K)⍴1,(K←1↑⍴B)⍴0
+ s←(L,L)⍴1,(L←1↓⍴B)⍴0
+ I←¯1
+LOOPI:→(∧/0=D←|,(I,I←I+1)↓B)/0
+ V←I+((⍴B)-I)⊤D⍳⌊/(D≠0)/D
+ X←B[J←V[0];K←V[1]]
+COL:→(∧/0=D←|X|B[;K])/ROW
+ L←D⍳⌊/(D≠0)/D
+ B[L;]←B[L;]-(Q←⌊(B[L;K]-X|B[L;K])÷X)×B[J;]
+ r[L;]←r[L;]-Q×r[J;]
+ X←B[J←L;K]
+ →COL
+ROW:→(∧/0=D←|X|B[J;])/GENERAL
+ M←D⍳⌊/(D≠0)/D
+ B[;M]←B[;M]-(Q←⌊(B[J;M]-X|B[J;M])÷X)×B[;K]
+ s[;M]←s[;M]-Q×s[;K]
+ X←B[J;K←M]
+ →COL
+GENERAL:→(∧/0=D←|X|,(I,I)↓B)/END
+ V←I+((⍴B)-I)⊤D⍳⌊/(D≠0)/D
+ B[L;]←B[L;]-(Q←¯1+⌊B[L←V[0];K]÷X)×B[J;]
+ r[L;]←r[L;]-Q×r[J;]
+ B[;M]←B[;M]-(Q←⌊(B[L;M]-X|B[L;M←V[1]])÷X)×B[;K]
+ s[;M]←s[;M]-Q×s[;K]
+ X←B[J←L;K←M]
+ →COL
+END:B[I,J;]←B[J,I;]
+ r[I,J;]←r[J,I;]
+ B[;I,K]←B[;K,I]
+ s[;I,K]←s[;K,I]
+ B[I;]←B[I;]××X
+ r[I;]←r[I;]××X
+ B[Y;]←B[Y;]-(Q←⌊B[Y←(I+1)↓⍳1↑⍴B;I]÷B[I;I])∘.×B[I;]
+ r[Y;]←r[Y;]-Q∘.×r[I;]
+ B[;Z]←B[;Z]-B[;I]∘.×Q←⌊B[I;Z←(I+1)↓⍳1↓⍴B]÷B[I;I]
+ s[;Z]←s[;Z]-s[;I]∘.×Q
+ →LOOPI

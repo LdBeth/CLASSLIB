@@ -1,0 +1,9 @@
+ G←F XXPOWER N
+⍝ EXERCISE 3.1.26
+ G←⍳⍴F
+LOOP:→(N=0)/0
+ →(0=2|N)/EVEN
+ G←G[F]
+EVEN:F←F[F]
+ N←⌊N÷2
+ →LOOP

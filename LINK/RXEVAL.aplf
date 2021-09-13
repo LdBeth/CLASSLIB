@@ -1,0 +1,8 @@
+ Y←A RXEVAL B;⎕IO
+⍝ EVALUATES THE REAL POLYNOMIALS IN  A  AT  B.
+ ⎕IO←0
+ B←((⍴B),1)⍴B
+ EXPANDV
+ B←(¯1↓⍴B)⍴B
+ Y←+/A×B∘.*⍳¯1↑⍴A
+ Y←Y×(|Y)≥EPSILON×⌈/,|Y
